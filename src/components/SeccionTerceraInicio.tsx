@@ -9,7 +9,7 @@ interface Posts {
 }
 
 export default async function SeccionTerceraInicio() {
-  const posts = await fetch("http://localhost:3001/api/posts");
+  const posts = await fetch("https://apiblog-01g5.onrender.com/api/posts");
   const data = await posts.json();
   console.log(data);
   return (
@@ -18,7 +18,16 @@ export default async function SeccionTerceraInicio() {
         <div className="  bg-white lg:col-span-2 flex flex-col gap-8">
           <h2 className="text-2xl font-bold">Artículos mas recientes</h2>
           {data.map((post: Posts) => (
-            <CardPost key={post._id} titulo={post.title} parrafo={post.desc} img="/1.jpg" categoria="Carne" autor="jona" fecha="12/12/2022" bg="bg-red-500" />
+            <CardPost
+              key={post._id}
+              titulo={post.title}
+              parrafo={post.desc}
+              img="/1.jpg"
+              categoria="Carne"
+              autor="jona"
+              fecha="12/12/2022"
+              bg="bg-red-500"
+            />
           ))}
           <Paginacion />
         </div>

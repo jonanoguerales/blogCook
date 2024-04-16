@@ -1,5 +1,5 @@
 import Link from "next/link";
-import "./login.moduls.css";
+import "./login.css";
 
 export default function Login() {
   return (
@@ -27,5 +27,5 @@ export default function Login() {
         </form>
       </div>
     </div>
-  )
+  );
 }

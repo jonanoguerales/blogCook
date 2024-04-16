@@ -1,5 +1,5 @@
 import Image from "next/image";
-import "./registro.moduls.css"
+import "./registro.css";
 
 export default function Registro() {
   return (
@@ -203,6 +203,6 @@ export default function Registro() {
           </div>
         </main>
       </div>
-    </section >
+    </section>
   );
 }
