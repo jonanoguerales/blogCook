@@ -1,13 +1,14 @@
 import Image from "next/image";
+import "./registro.moduls.css"
 
 export default function Registro() {
   return (
     <section className="bg-white">
-      <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
+      <div className="lg:grid lg:grid-cols-12 contentRegistro">
         <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <Image
             alt=""
-            src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            src="/1.jpg"
             className="absolute inset-0 h-full w-full object-cover opacity-80"
             width={1280}
             height={720}
@@ -202,6 +203,6 @@ export default function Registro() {
           </div>
         </main>
       </div>
-    </section>
+    </section >
   );
 }
