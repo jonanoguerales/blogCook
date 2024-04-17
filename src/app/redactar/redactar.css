@@ -18,6 +18,7 @@
 
 .writeForm {
   position: relative;
+  max-width: 1600px;
 }
 
 .writeFormGroup {

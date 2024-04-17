@@ -1,7 +1,7 @@
 "use client";
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,7 +49,6 @@ export function Header() {
                     href="/"
                     onClick={closeMenu}
                   >
-
                     Inicio
                   </Link>
                 </li>
@@ -60,7 +59,6 @@ export function Header() {
                     href="/redactar"
                     onClick={closeMenu}
                   >
-
                     Redactar
                   </Link>
                 </li>
@@ -71,7 +69,6 @@ export function Header() {
                     href="/contacto"
                     onClick={closeMenu}
                   >
-
                     Contacto
                   </Link>
                 </li>
@@ -79,46 +76,83 @@ export function Header() {
             </nav>
           </div>
 
-
           <div className="block md:hidden">
-            <button className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75" onClick={toggleMenu}>
+            <button
+              className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+              onClick={toggleMenu}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                strokeWidth="2"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                  d={
+                    isMenuOpen
+                      ? "M6 18L18 6M6 6l12 12"
+                      : "M4 6h16M4 12h16M4 18h16"
+                  }
                 />
               </svg>
             </button>
           </div>
 
-
           <div className="flex items-center gap-4">
             {isLoggedIn ? (
               <div className="relative">
-                <button type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" onClick={toggleProfileMenu}>
-                  <Image className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo" width={32} height={32} />
+                <button
+                  type="button"
+                  className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                  onClick={toggleProfileMenu}
+                >
+                  <Image
+                    className="w-8 h-8 rounded-full"
+                    src="/docs/images/people/profile-picture-3.jpg"
+                    alt="user photo"
+                    width={32}
+                    height={32}
+                  />
                 </button>
                 {isProfileMenuOpen && (
-                  <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20"> {/* Establece un z-index alto para el menú del perfil */}
-                    <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                      <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={closeProfileMenu}>
+                  <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20">
+                    {" "}
+                    {/* Establece un z-index alto para el menú del perfil */}
+                    <div
+                      className="py-1"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu"
+                    >
+                      <Link
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={closeProfileMenu}
+                      >
                         Dashboard
                       </Link>
-                      <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={closeProfileMenu}>
+                      <Link
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={closeProfileMenu}
+                      >
                         Opciones
                       </Link>
-                      <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={closeProfileMenu}>
+                      <Link
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={closeProfileMenu}
+                      >
                         Perfil
                       </Link>
-                      <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={closeProfileMenu}>
+                      <Link
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={closeProfileMenu}
+                      >
                         Desconectar
                       </Link>
                     </div>
@@ -153,7 +187,6 @@ export function Header() {
                     href="/"
                     onClick={closeMenu}
                   >
-
                     Inicio
                   </Link>
                 </li>
@@ -164,7 +197,6 @@ export function Header() {
                     href="/redactar"
                     onClick={closeMenu}
                   >
-
                     Redactar
                   </Link>
                 </li>
@@ -175,7 +207,6 @@ export function Header() {
                     href="/contacto"
                     onClick={closeMenu}
                   >
-
                     Contacto
                   </Link>
                 </li>

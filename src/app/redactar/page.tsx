@@ -34,9 +34,10 @@ export default function Redactar() {
     if (file) {
       const data = new FormData();
       data.append("file", file);
-      const response = await fetch(
-        "/api/upload", { method: "POST", body: data }
-      );
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: data,
+      });
       const datajson = await response.json();
       newPost.photo = datajson.url;
     }
@@ -52,9 +53,15 @@ export default function Redactar() {
   };
 
   return (
-    <div className="write">
+    <div className="write mx-auto max-w-screen-3xl">
       {file && (
-        <Image className="writeImg" src={previewUrl} alt="" width={1280} height={720} />
+        <Image
+          className="writeImg"
+          src={previewUrl}
+          alt=""
+          width={1280}
+          height={720}
+        />
       )}
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
@@ -62,11 +69,16 @@ export default function Redactar() {
             <i className="writeIcon fas fa-plus" />
             Imagen
           </label>
-          <input id="fileInput" type="file" style={{ display: "none" }} onChange={(e) => {
-            if (e.target.files && e.target.files[0] instanceof File) {
-              setFile(e.target.files[0])
-            }
-          }} />
+          <input
+            id="fileInput"
+            type="file"
+            style={{ display: "none" }}
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0] instanceof File) {
+                setFile(e.target.files[0]);
+              }
+            }}
+          />
           <input
             className="writeInput"
             placeholder="Titulo"

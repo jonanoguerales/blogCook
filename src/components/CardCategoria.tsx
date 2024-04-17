@@ -10,7 +10,7 @@ interface CardCategoriaProps {
 export function CardCategoria(props: CardCategoriaProps) {
   return (
     <article
-      className={`flex items-center justify-center gap-4 rounded-lg border border-gray-100 ${props.bg} shadow-lg py-2 px-4 min-w-[200px] mx-auto text-center`}
+      className={`flex items-center justify-center gap-4 rounded-lg border border-gray-100 ${props.bg} shadow-lg py-2 px-4 min-w-[200px] mx-auto text-center hover:shadow-2xl hover:opacity-75`}
     >
       <Image
         src={props.img}

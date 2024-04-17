@@ -31,7 +31,7 @@ export function SiderBar() {
           fecha="12/12/2022"
         />
       </article>
-      <article className="flex flex-col gap-6">
+      <article className="flex flex-col gap-6 items-center">
         <h2 className="text-2xl font-bold">Usuarios Populares</h2>
         <CardUsuariosPopular
           img="/1.jpg"
