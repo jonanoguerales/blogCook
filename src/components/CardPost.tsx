@@ -13,18 +13,19 @@ interface CardPostProps {
 export function CardPost(params: CardPostProps) {
   return (
     <article className="overflow-hidden rounded-lg shadow transition hover:shadow-lg flex">
-      <Image
-        alt=""
-        src={params.img}
-        className="w-full h-56 object-cover"
-        width={1920}
-        height={1080}
-      />
+      <div className="w-1/2">
+        <Image
+          alt=""
+          src={params.img}
+          className="w-auto h- object-cover"
+          width={640}
+          height={426}
+        />
+      </div>
 
-      <div className="bg-white p-4 sm:p-6">
+      <div className="bg-white p-4 sm:p-6 w-1/2">
         <time dateTime="2022-10-10" className="block text-xs text-gray-500">
-          {" "}
-          {params.fecha}{" "}
+          {params.fecha}
         </time>
 
         <a href="#">

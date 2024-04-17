@@ -11,8 +11,8 @@ export function SeccionPrimeraInicio() {
                 alt="Imagen de la receta"
                 src="/1.jpg"
                 className="absolute inset-0 h-full w-full object-cover lg:rounded-lg rounded-t-lg shadow-xl"
-                width={500}
-                height={500}
+                width={1080}
+                height={720}
               />
             </div>
           </div>

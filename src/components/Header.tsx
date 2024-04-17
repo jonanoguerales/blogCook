@@ -57,7 +57,7 @@ export function Header() {
                 <li>
                   <Link
                     className="text-gray-900 transition hover:text-gray-500/75 text-xl"
-                    href="redactar"
+                    href="/redactar"
                     onClick={closeMenu}
                   >
 
@@ -68,7 +68,7 @@ export function Header() {
                 <li>
                   <Link
                     className="text-gray-900 transition hover:text-gray-500/75 text-xl"
-                    href="contacto"
+                    href="/contacto"
                     onClick={closeMenu}
                   >
 
@@ -129,13 +129,13 @@ export function Header() {
               <div className="flex gap-4">
                 <Link
                   className="rounded-md bg-blue-800 px-5 py-2.5 text-sm font-medium text-white shadow"
-                  href="login"
+                  href="/login"
                 >
                   Identificarse
                 </Link>
                 <Link
                   className="rounded-md bg-sky-100 px-5 py-2.5 text-sm font-medium text-blue-800"
-                  href="registro"
+                  href="/registro"
                 >
                   Registrarse
                 </Link>
@@ -161,7 +161,7 @@ export function Header() {
                 <li>
                   <Link
                     className="text-gray-900 transition hover:text-gray-500/75 text-xl"
-                    href="redactar"
+                    href="/redactar"
                     onClick={closeMenu}
                   >
 
@@ -172,7 +172,7 @@ export function Header() {
                 <li>
                   <Link
                     className="text-gray-900 transition hover:text-gray-500/75 text-xl"
-                    href="contacto"
+                    href="/contacto"
                     onClick={closeMenu}
                   >
 

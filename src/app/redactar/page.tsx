@@ -1,13 +1,26 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import "./redactar.css";
 
 export default function Redactar() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [categories, setCategories] = useState("");
-  const [file, setFile] = useState(null) as any;
+  const [file, setFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState("");
   //const { user } = useContext(Context);
+
+  useEffect(() => {
+    if (file) {
+      const newPreviewUrl = URL.createObjectURL(file);
+      setPreviewUrl(newPreviewUrl);
+
+      // Revoke the object URL to avoid memory leaks
+      return () => URL.revokeObjectURL(newPreviewUrl);
+    }
+  }, [file]);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const newPost = {
@@ -20,22 +33,19 @@ export default function Redactar() {
     };
     if (file) {
       const data = new FormData();
-      const filename = Date.now() + file.name;
-      data.append("name", filename);
       data.append("file", file);
-      newPost.photo = filename; // Usa el dato guardado en filename para guardarlo tambien en newPost.photo
-      try {
-        await axios.post("https://apiblog-01g5.onrender.com/api/upload", data);
-      } catch (err) {
-        console.log(err);
-      }
+      const response = await fetch(
+        "/api/upload", { method: "POST", body: data }
+      );
+      const datajson = await response.json();
+      newPost.photo = datajson.url;
     }
     try {
       const res = await axios.post(
         "https://apiblog-01g5.onrender.com/api/posts",
         newPost
       );
-      window.location.replace("/post/" + res.data._id);
+      window.location.replace("/posts/" + res.data._id);
     } catch (err) {
       console.log(err);
     }
@@ -44,7 +54,7 @@ export default function Redactar() {
   return (
     <div className="write">
       {file && (
-        <img className="writeImg" src={URL.createObjectURL(file)} alt="" />
+        <Image className="writeImg" src={previewUrl} alt="" width={1280} height={720} />
       )}
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
@@ -52,7 +62,11 @@ export default function Redactar() {
             <i className="writeIcon fas fa-plus" />
             Imagen
           </label>
-          <input id="fileInput" type="file" style={{ display: "none" }} />
+          <input id="fileInput" type="file" style={{ display: "none" }} onChange={(e) => {
+            if (e.target.files && e.target.files[0] instanceof File) {
+              setFile(e.target.files[0])
+            }
+          }} />
           <input
             className="writeInput"
             placeholder="Titulo"
@@ -75,11 +89,10 @@ export default function Redactar() {
             name="categorias"
             id="categorias"
             autoFocus
+            defaultValue="Carne"
             onChange={(e) => setCategories(e.target.value)}
           >
-            <option value="Categoria" selected defaultValue="categoria">
-              Categoria
-            </option>
+            <option value="Carne">Carne</option>
             <option value="Terror">Terror</option>
             <option value="Música">Musica</option>
             <option value="Interesantes">Interesantes</option>

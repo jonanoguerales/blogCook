@@ -1,6 +1,9 @@
 import { CardCategoria } from "./CardCategoria";
 
-export function SeccionSecundariaInicio() {
+export async function SeccionSecundariaInicio() {
+  const categorias = await fetch("https://apiblog-01g5.onrender.com/api/categories");
+  const data = await categorias.json();
+  console.log(data);
   return (
     <section className="mx-auto max-w-screen-3xl px-4 py-16 sm:px-6 lg:px-8">
       <h2 className="text-4xl font-bold text-center pb-8">
@@ -14,7 +17,7 @@ export function SeccionSecundariaInicio() {
         <CardCategoria img="/1.jpg" categoria={"Ensaladas"} bg="bg-lime-400" />
         <CardCategoria
           img="/1.jpg"
-          categoria={"Sopas y Cremas"}
+          categoria={"Postres"}
           bg="bg-orange-300"
         />
       </article>
