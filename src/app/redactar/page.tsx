@@ -42,10 +42,7 @@ export default function Redactar() {
       newPost.photo = datajson.url;
     }
     try {
-      const res = await axios.post(
-        "https://apiblog-01g5.onrender.com/api/posts",
-        newPost
-      );
+      const res = await axios.post("http://localhost:3001/api/posts", newPost);
       window.location.replace("/posts/" + res.data._id);
     } catch (err) {
       console.log(err);

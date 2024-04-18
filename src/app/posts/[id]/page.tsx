@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Link from 'next/link';
-import Image from 'next/image';
-import "./post.css"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Link from "next/link";
+import Image from "next/image";
+import "./post.css";
 
 interface Post {
   _id: string;
@@ -16,19 +16,19 @@ interface Post {
 
 const SinglePost: React.FC = () => {
   //const router = useRouter();
-  const id = "661fcd85bdd97ca78556618b"
+  const id = "661fcd85bdd97ca78556618b";
   const [post, setPost] = useState<Post | null>(null);
-  const [title, setTitle] = useState('');
-  const [desc, setDesc] = useState('');
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
   const [updateMode, setUpdateMode] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   // const { user } = useContext(UserContext); // Descomentar y usar tu contexto real
 
   useEffect(() => {
     const getPost = async () => {
-      if (typeof id === 'string') {
+      if (typeof id === "string") {
         try {
-          const res = await axios.get(`https://apiblog-01g5.onrender.com/api/posts/${id}`);
+          const res = await axios.get(`http://localhost:3001/api/posts/${id}`);
           setPost(res.data);
           setTitle(res.data.title);
           setDesc(res.data.desc);
@@ -44,8 +44,8 @@ const SinglePost: React.FC = () => {
   const handleDelete = async () => {
     if (post) {
       try {
-        await axios.delete(`https://apiblog-01g5.onrender.com/api/posts/${post._id}`, {
-          data: { username: 'jona' }, // Reemplazar con el nombre de usuario real si es necesario
+        await axios.delete(`http://localhost:3001/api/posts/${post._id}`, {
+          data: { username: "jona" }, // Reemplazar con el nombre de usuario real si es necesario
         });
         //router.push('/');
       } catch (error) {
@@ -58,18 +58,21 @@ const SinglePost: React.FC = () => {
     if (post && file) {
       const data = new FormData();
       const filename = Date.now() + file.name;
-      data.append('name', filename);
-      data.append('file', file);
+      data.append("name", filename);
+      data.append("file", file);
 
       try {
-        await axios.post('https://apiblog-01g5.onrender.com/api/upload', data);
+        await axios.post("http://localhost:3001/api/upload", data);
         const updatePost = {
-          username: 'jona', // Reemplazar con el nombre de usuario real si es necesario
+          username: "jona", // Reemplazar con el nombre de usuario real si es necesario
           title,
           desc,
           photo: filename,
         };
-        await axios.put(`https://apiblog-01g5.onrender.com/api/posts/${post._id}`, updatePost);
+        await axios.put(
+          `http://localhost:3001/api/posts/${post._id}`,
+          updatePost
+        );
         setUpdateMode(false);
       } catch (error) {
         console.error(error);
@@ -83,7 +86,7 @@ const SinglePost: React.FC = () => {
       <div className="singlePostWrapper">
         <Image
           className="writeImg"
-          src={post ? post.photo : ''}
+          src={post ? post.photo : ""}
           alt="imagen del articulo"
           width={1980}
           height={1080}
@@ -100,7 +103,7 @@ const SinglePost: React.FC = () => {
           className="singlePostImg"
           onChange={(e) => {
             if (e.target.files) {
-              setFile(e.target.files[0])
+              setFile(e.target.files[0]);
             }
           }}
         />
@@ -137,7 +140,7 @@ const SinglePost: React.FC = () => {
             </Link>
           </span>
           <span className="singlePostDate">
-            {post ? new Date(post.createdAt).toDateString() : 'Loading...'}
+            {post ? new Date(post.createdAt).toDateString() : "Loading..."}
           </span>
         </div>
         {updateMode ? (

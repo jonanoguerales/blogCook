@@ -5,29 +5,35 @@ import axios from "axios";
 import { useContext, useRef, useState } from "react";
 import { Context } from "@/context/Context";
 import { redirect } from "next/navigation";
+import { serialize } from "cookie";
 
 export default function Login() {
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const { dispatch } = useContext(Context);
   const [success, setSuccess] = useState<boolean>(false);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(userRef.current?.value, passwordRef.current?.value);
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post(
-        "https://apiblog-01g5.onrender.com/api/auth/login",
-        {
-          username: userRef.current?.value,
-          password: passwordRef.current?.value,
-        }
-      );
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-      redirect("/posts");
+      const res = await axios.post("http://localhost:3001/api/auth/login", {
+        username: userRef.current?.value,
+        password: passwordRef.current?.value,
+      });
+      setAccessToken(res.data);
+      const serialized = serialize("accessToken", res.data, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "none",
+        maxAge: 1000 * 60 * 60 * 24, // 1 dia
+      });
+      document.cookie = serialized;
+      console.log(res.data);
     } catch (err) {
-      dispatch({ type: "LOGIN_FAILURE" });
-      setSuccess(true);
+      console.log(err);
     }
   };
   return (

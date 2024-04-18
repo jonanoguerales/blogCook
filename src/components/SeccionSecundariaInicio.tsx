@@ -1,7 +1,7 @@
 import { CardCategoria } from "./cardCategoria";
 
 export async function SeccionSecundariaInicio() {
-  const categorias = await fetch("https://apiblog-01g5.onrender.com/api/categories");
+  const categorias = await fetch("http://localhost:3001/api/categories");
   const data = await categorias.json();
   console.log(data);
   return (
@@ -15,11 +15,7 @@ export async function SeccionSecundariaInicio() {
         <CardCategoria img="/1.jpg" categoria={"Pasta"} bg="bg-yellow-300" />
         <CardCategoria img="/1.jpg" categoria={"Verduras"} bg="bg-green-600" />
         <CardCategoria img="/1.jpg" categoria={"Ensaladas"} bg="bg-lime-400" />
-        <CardCategoria
-          img="/1.jpg"
-          categoria={"Postres"}
-          bg="bg-orange-300"
-        />
+        <CardCategoria img="/1.jpg" categoria={"Postres"} bg="bg-orange-300" />
       </article>
     </section>
   );

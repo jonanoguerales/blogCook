@@ -9,7 +9,7 @@ export default function SeccionTerceraInicio() {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const posts = async () => {
-      const res = await fetch("https://apiblog-01g5.onrender.com/api/posts");
+      const res = await fetch("http://localhost:3001/api/posts");
       const data = await res.json();
       setPosts(data);
     };
