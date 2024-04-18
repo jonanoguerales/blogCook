@@ -1,11 +1,4 @@
-interface CardPopularesProps {
-  categoria: string;
-  titulo: string;
-  parrafo: string;
-  bg: string;
-  fecha: string;
-  autor: string;
-}
+import { CardPopularesProps } from "@/lib/interfaces";
 export function CardPopulares(props: CardPopularesProps) {
   return (
     <article className="rounded-xl bg-white p-4 ring ring-indigo-50 sm:p-6 lg:p-8">

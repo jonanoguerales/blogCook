@@ -1,14 +1,5 @@
 import Image from "next/image";
-
-interface CardPostProps {
-  img: string;
-  categoria: string;
-  titulo: string;
-  parrafo: string;
-  bg: string;
-  fecha: string;
-  autor: string;
-}
+import { CardPostProps } from "@/lib/interfaces";
 
 export function CardPost(params: CardPostProps) {
   return (

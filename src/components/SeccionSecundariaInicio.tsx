@@ -1,4 +1,4 @@
-import { CardCategoria } from "./CardCategoria";
+import { CardCategoria } from "./cardCategoria";
 
 export async function SeccionSecundariaInicio() {
   const categorias = await fetch("https://apiblog-01g5.onrender.com/api/categories");

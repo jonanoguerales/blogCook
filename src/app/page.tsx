@@ -1,6 +1,6 @@
-import { SeccionPrimeraInicio } from "@/components/SeccionPrimeraInicio";
-import { SeccionSecundariaInicio } from "@/components/SeccionSecundariaInicio";
-import SeccionTerceraInicio from "@/components/SeccionTerceraInicio";
+import { SeccionPrimeraInicio } from "@/components/seccionPrimeraInicio";
+import { SeccionSecundariaInicio } from "@/components/seccionSecundariaInicio";
+import SeccionTerceraInicio from "@/components/seccionTerceraInicio";
 
 export default function Home() {
   return (

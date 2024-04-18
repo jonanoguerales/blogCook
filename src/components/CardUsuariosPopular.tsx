@@ -5,14 +5,7 @@ import {
   ChatBubbleLeftRightIcon,
   ClipboardDocumentListIcon,
 } from "@heroicons/react/24/solid";
-
-interface CardUsuariosPopularProps {
-  img: string;
-  comentarios: number;
-  posts: number;
-  likes: number;
-  usuario: string;
-}
+import { CardUsuariosPopularProps } from "@/lib/interfaces";
 
 export function CardUsuariosPopular(props: CardUsuariosPopularProps) {
   return (

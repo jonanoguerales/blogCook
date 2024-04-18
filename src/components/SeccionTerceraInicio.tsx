@@ -1,20 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { CardPost } from "./CardPost";
-import { Paginacion } from "./Paginacion";
-import { SiderBar } from "./SideBar";
-
-interface Posts {
-  _id: string;
-  title: string;
-  desc: string;
-  photo: string;
-  username: string;
-  id_user: string;
-  categories: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { CardPost } from "./cardPost";
+import { Paginacion } from "./paginacion";
+import { SiderBar } from "./sideBar";
+import { Posts } from "@/lib/interfaces";
 
 export default function SeccionTerceraInicio() {
   const [posts, setPosts] = useState([]);

@@ -1,5 +1,5 @@
-import { CardPopulares } from "./CardPopulares";
-import { CardUsuariosPopular } from "./CardUsuariosPopular";
+import { CardPopulares } from "./cardPopulares";
+import { CardUsuariosPopular } from "./cardUsuariosPopular";
 
 export function SiderBar() {
   return (
