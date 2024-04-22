@@ -2,36 +2,25 @@
 import Link from "next/link";
 import "./login.css";
 import axios from "axios";
-import { useContext, useRef, useState } from "react";
-import { Context } from "@/context/Context";
-import { redirect } from "next/navigation";
-import { serialize } from "cookie";
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const { dispatch } = useContext(Context);
-  const [success, setSuccess] = useState<boolean>(false);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-
+  const [success] = useState<boolean>(false);
+  const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(userRef.current?.value, passwordRef.current?.value);
-    dispatch({ type: "LOGIN_START" });
+    axios.defaults.withCredentials = true; // Asegúrate de que las cookies se incluyan en esta llamada
     try {
       const res = await axios.post("http://localhost:3001/api/auth/login", {
         username: userRef.current?.value,
         password: passwordRef.current?.value,
       });
-      setAccessToken(res.data);
-      const serialized = serialize("accessToken", res.data, {
-        httpOnly: true,
-        secure: false,
-        sameSite: "none",
-        maxAge: 1000 * 60 * 60 * 24, // 1 dia
-      });
-      document.cookie = serialized;
-      console.log(res.data);
+      if (res.status === 200) {
+        router.push("/");
+      }
     } catch (err) {
       console.log(err);
     }
