@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 import { CardCategoriaProps } from "@/lib/interfaces";
 
 export function CardCategoria(props: CardCategoriaProps) {

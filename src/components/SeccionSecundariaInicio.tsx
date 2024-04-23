@@ -1,9 +1,6 @@
-import { CardCategoria } from "./cardCategoria";
+import { CardCategoria } from "./CardCategoria";
 
 export async function SeccionSecundariaInicio() {
-  const categorias = await fetch("http://localhost:3001/api/categories");
-  const data = await categorias.json();
-  console.log(data);
   return (
     <section className="mx-auto max-w-screen-3xl px-4 py-16 sm:px-6 lg:px-8">
       <h2 className="text-4xl font-bold text-center pb-8">

@@ -7,7 +7,6 @@ export function Logout() {
       const res = await axios.post("http://localhost:3001/api/auth/logout", {
         withCredentials: true,
       });
-      console.log(res.data);
     } catch (err) {
       console.log(err);
     }

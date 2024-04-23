@@ -1,8 +1,41 @@
-"use client";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import "./redactar.css";
+import { GetServerSideProps, NextPage } from "next";
+import { ParsedUrlQuery } from "querystring";
+import { verifyToken } from "@/lib/auth";
+import { JWTPayload } from "jose";
+
+interface Props {
+  user: JWTPayload;
+}
+
+interface Params extends ParsedUrlQuery {
+  // Define aquí los parámetros de tu URL, si los hay
+}
+
+export const getServerSideProps: GetServerSideProps<Props, Params> = async (
+  context
+) => {
+  const { req } = context;
+  const token = req.cookies["accessToken"];
+
+  try {
+    const user = await verifyToken(token);
+
+    return {
+      props: { user }, // Asegúrate de solo incluir información no sensible
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+};
 
 export default function Redactar() {
   const [title, setTitle] = useState("");
