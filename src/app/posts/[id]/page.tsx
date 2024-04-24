@@ -1,4 +1,4 @@
-import SinglePost from "@/components/SinglePost";
+import SinglePost from "@/components/singlePost/SinglePost";
 
 function Post({ params: { id } }: { params: { id: string } }) {
   return (
@@ -6,6 +6,6 @@ function Post({ params: { id } }: { params: { id: string } }) {
       <SinglePost id={id as string} />
     </div>
   );
-};
+}
 
 export default Post;

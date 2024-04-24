@@ -21,7 +21,7 @@ export async function PostsObtenidos() {
           categoria={post.categories}
           autor={post.username}
           fecha={post.createdAt}
-          bg="bg-red-500"
+          bg={post.bg}
         />
       ))}
     </>

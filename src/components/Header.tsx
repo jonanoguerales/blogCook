@@ -129,21 +129,21 @@ export function Header() {
                       aria-labelledby="options-menu"
                     >
                       <Link
-                        href="#"
+                        href="/dashboard"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         onClick={closeProfileMenu}
                       >
                         Dashboard
                       </Link>
                       <Link
-                        href="#"
+                        href="/ajustes"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         onClick={closeProfileMenu}
                       >
-                        Opciones
+                        Ajustes
                       </Link>
                       <Link
-                        href="#"
+                        href="/perfil"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         onClick={closeProfileMenu}
                       >

@@ -3,19 +3,31 @@ import Image from "next/image";
 import { useState, useEffect, FormEvent } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useAuth } from '@/context/authContext';
+import { useAuth } from "@/context/authContext";
 import { UpdateUser } from "@/components/UpdateUser";
+import "./redactar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage } from "@fortawesome/free-regular-svg-icons";
 
 const getCategoryColors = async () => {
   try {
     const response = await axios.get("http://localhost:3001/api/categories");
-    const categoryColors = response.data.reduce((colors: Record<string, string>, category: { name: string; color: string }) => {
-      colors[category.name] = category.color;
-      return colors;
-    }, {});
+    const categoryColors = response.data.reduce(
+      (
+        colors: Record<string, string>,
+        category: { name: string; color: string }
+      ) => {
+        colors[category.name] = category.color;
+        return colors;
+      },
+      {}
+    );
     return categoryColors;
   } catch (error) {
-    console.error("Error al obtener los colores de la tabla de categorías:", error);
+    console.error(
+      "Error al obtener los colores de la tabla de categorías:",
+      error
+    );
     return {};
   }
 };
@@ -28,7 +40,9 @@ export default function Redactar() {
   const [previewUrl, setPreviewUrl] = useState("");
   const router = useRouter();
   const { user } = useAuth();
-  const [categoryColors, setCategoryColors] = useState<Record<string, string>>({});
+  const [categoryColors, setCategoryColors] = useState<Record<string, string>>(
+    {}
+  );
   const [selectedColor, setSelectedColor] = useState<string>("");
 
   console.log(selectedColor);
@@ -49,7 +63,6 @@ export default function Redactar() {
       return () => URL.revokeObjectURL(newPreviewUrl);
     }
   }, [file]);
-
 
   if (!user) {
     console.error("No hay información de usuario disponible.");
@@ -111,7 +124,7 @@ export default function Redactar() {
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
           <label htmlFor="fileInput" className="inputImagePlus">
-            <i className="writeIcon fas fa-plus" />
+            <FontAwesomeIcon icon={faImage} className="writeIcon" />
             Imagen
           </label>
           <input
@@ -148,7 +161,7 @@ export default function Redactar() {
             autoFocus
             defaultValue="Carne"
             onChange={(e) => {
-              setCategories(e.target.value)
+              setCategories(e.target.value);
               setSelectedColor(categoryColors[e.target.value]);
             }}
           >
@@ -159,11 +172,11 @@ export default function Redactar() {
             <option value="Ensaladas">Ensaladas</option>
             <option value="Postres">Postres</option>
           </select>
+          <button className="writeSubmit" type="submit">
+            Publicar
+          </button>
         </div>
-        <button className="writeSubmit" type="submit">
-          Publicar
-        </button>
       </form>
     </div>
   );
-};
+}

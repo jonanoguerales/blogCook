@@ -1,0 +1,38 @@
+.footer {
+  background-color: #1f252d;
+  color: #f2f2f2;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.footerInfo h2 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  margin-left: 20px;
+}
+
+.footerIcons {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon-footer:hover {
+  color: #3b54c5;
+}
+
+@media screen and (max-width: 480px) {
+  .footer {
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .icon-footer {
+    padding: 2px;
+  }
+}

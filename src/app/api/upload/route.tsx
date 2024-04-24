@@ -23,7 +23,7 @@ interface CloudinaryResponse {
 cloudinary.config({
   cloud_name: "dpauhj4zu",
   api_key: "988287673892132",
-  api_secret: process.env.CLOUDINARY_SECRET,
+  api_secret: "JjXRvKQUEpvhSYC3CRJ4k-a0u4Y",
 });
 export async function POST(request: Request) {
   const data = await request.formData();
