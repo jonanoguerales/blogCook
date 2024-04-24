@@ -8,6 +8,8 @@ export interface User {
   profilePic: string;
   role: string;
   numPosts: number;
+  numComentarios: number;
+  numLikes: number;
 }
 
 export interface State {
@@ -35,12 +37,14 @@ export interface CardCategoriaProps {
 }
 
 export interface CardPopularesProps {
+  id: string;
   categoria: string;
-  titulo: string;
+  title: string;
   parrafo: string;
   bg: string;
   fecha: string;
   autor: string;
+  likes: number;
 }
 
 export interface CardPostProps {
@@ -72,9 +76,25 @@ export interface Posts {
   categories: string;
   createdAt: string;
   updatedAt: string;
+  bg: string;
+  numLikes: number;
+  shortDescription: string;
 }
 
 export interface PrivateRouteProps {
   hasRole: string;
   children: React.ReactNode;
+}
+
+export interface Post {
+  _id: string;
+  title: string;
+  desc: string;
+  photo: string;
+  username: string;
+  createdAt: string;
+}
+
+export interface SinglePostProps {
+  id: string;
 }

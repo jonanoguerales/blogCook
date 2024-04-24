@@ -1,84 +1,99 @@
-import axios from "axios";
+"use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import "./redactar.css";
-import { GetServerSideProps, NextPage } from "next";
-import { ParsedUrlQuery } from "querystring";
-import { verifyToken } from "@/lib/auth";
-import { JWTPayload } from "jose";
+import { useState, useEffect, FormEvent } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useAuth } from '@/context/authContext';
+import { UpdateUser } from "@/components/UpdateUser";
 
-interface Props {
-  user: JWTPayload;
-}
-
-interface Params extends ParsedUrlQuery {
-  // Define aquí los parámetros de tu URL, si los hay
-}
-
-export const getServerSideProps: GetServerSideProps<Props, Params> = async (
-  context
-) => {
-  const { req } = context;
-  const token = req.cookies["accessToken"];
-
+const getCategoryColors = async () => {
   try {
-    const user = await verifyToken(token);
-
-    return {
-      props: { user }, // Asegúrate de solo incluir información no sensible
-    };
+    const response = await axios.get("http://localhost:3001/api/categories");
+    const categoryColors = response.data.reduce((colors: Record<string, string>, category: { name: string; color: string }) => {
+      colors[category.name] = category.color;
+      return colors;
+    }, {});
+    return categoryColors;
   } catch (error) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
+    console.error("Error al obtener los colores de la tabla de categorías:", error);
+    return {};
   }
 };
 
 export default function Redactar() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState("Carne");
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState("");
-  //const { user } = useContext(Context);
+  const router = useRouter();
+  const { user } = useAuth();
+  const [categoryColors, setCategoryColors] = useState<Record<string, string>>({});
+  const [selectedColor, setSelectedColor] = useState<string>("");
+
+  console.log(selectedColor);
+  useEffect(() => {
+    const fetchCategoryColors = async () => {
+      const colors = await getCategoryColors();
+      setCategoryColors(colors);
+    };
+
+    fetchCategoryColors();
+  }, []);
 
   useEffect(() => {
     if (file) {
       const newPreviewUrl = URL.createObjectURL(file);
       setPreviewUrl(newPreviewUrl);
 
-      // Revoke the object URL to avoid memory leaks
       return () => URL.revokeObjectURL(newPreviewUrl);
     }
   }, [file]);
-  const handleSubmit = async (e: any) => {
+
+
+  if (!user) {
+    console.error("No hay información de usuario disponible.");
+    return console.log("No hay información de usuario disponible.");
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!user) {
+      console.error("No hay información de usuario disponible.");
+      return;
+    }
+
     const newPost = {
-      username: "jona",
+      username: user.username,
       title,
       desc,
       categories,
-      id_user: "65d7146ccc2dca2496cb4728",
+      id_user: user.id,
       photo: "",
+      bg: selectedColor,
     };
     if (file) {
       const data = new FormData();
       data.append("file", file);
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        body: data,
-      });
-      const datajson = await response.json();
-      newPost.photo = datajson.url;
+      try {
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: data,
+        });
+        const datajson = await response.json();
+        newPost.photo = datajson.url;
+      } catch (err) {
+        console.error(err);
+        return;
+      }
     }
+    console.log(newPost);
     try {
       const res = await axios.post("http://localhost:3001/api/posts", newPost);
-      window.location.replace("/posts/" + res.data._id);
+      router.replace(`/posts/${res.data._id}`);
+      await UpdateUser(user, "post");
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -132,19 +147,17 @@ export default function Redactar() {
             id="categorias"
             autoFocus
             defaultValue="Carne"
-            onChange={(e) => setCategories(e.target.value)}
+            onChange={(e) => {
+              setCategories(e.target.value)
+              setSelectedColor(categoryColors[e.target.value]);
+            }}
           >
             <option value="Carne">Carne</option>
-            <option value="Terror">Terror</option>
-            <option value="Música">Musica</option>
-            <option value="Interesantes">Interesantes</option>
-            <option value="Viajes">Viajes</option>
-            <option value="Misteriosos">Misteriosos</option>
-            <option value="Anime">Anime</option>
-            <option value="Videojuegos">Videojuegos</option>
-            <option value="Comedia">Comedia</option>
-            <option value="Romance">Romance</option>
-            <option value="Bélica">Bélica</option>
+            <option value="Pescado">Pescado</option>
+            <option value="Pasta">Pasta</option>
+            <option value="Verduras">Verduras</option>
+            <option value="Ensaladas">Ensaladas</option>
+            <option value="Postres">Postres</option>
           </select>
         </div>
         <button className="writeSubmit" type="submit">
@@ -153,4 +166,4 @@ export default function Redactar() {
       </form>
     </div>
   );
-}
+};

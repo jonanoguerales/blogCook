@@ -4,12 +4,12 @@ export function CardPopulares(props: CardPopularesProps) {
     <article className="rounded-xl bg-white p-4 ring ring-indigo-50 sm:p-6 lg:p-8">
       <div>
         <strong
-          className={`rounded border ${props.bg} px-3 py-1.5 text-[14px] font-medium text-white`}
+          className={`rounded border ${props.bg} px-3 py-1.5 text-[14px] font-medium text-black`}
         >
           {props.categoria}
         </strong>
 
-        <h3 className="mt-4 text-lg font-medium sm:text-xl">{props.titulo}</h3>
+        <h3 className="mt-4 text-lg font-medium sm:text-xl">{props.title}</h3>
 
         <p className="mt-1 text-sm text-gray-700">{props.parrafo}</p>
 

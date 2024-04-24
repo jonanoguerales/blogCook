@@ -49,8 +49,6 @@ export async function POST(request: Request) {
       .end(buffer);
   });
 
-  console.log(respuesta);
-
   return NextResponse.json({
     message: "imagen subida",
     url: respuesta.secure_url,
