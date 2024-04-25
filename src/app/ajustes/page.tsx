@@ -9,7 +9,6 @@ import { User } from "@/lib/interfaces";
 import { getUsers } from "../perfil/[id]/page";
 import Image from "next/image";
 
-
 const Settings = () => {
   const [file, setFile] = useState<File | null>(null);
   const [username, setUsername] = useState("");
@@ -26,7 +25,6 @@ const Settings = () => {
     const fetchUser = async () => {
       try {
         const response = await getUsers(user?.id ?? "");
-        console.log(response);
         setUserId(response);
       } catch (err) {
         console.error(err);
@@ -52,7 +50,7 @@ const Settings = () => {
           data: { username: user?.username },
         }
       );
-    } catch (err) { }
+    } catch (err) {}
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -87,7 +85,7 @@ const Settings = () => {
         updatedUser
       );
       setSuccess(true);
-    } catch (err) { }
+    } catch (err) {}
   };
   return (
     <>
@@ -98,7 +96,12 @@ const Settings = () => {
           </div>
           <form className="settingsForm" onSubmit={handleSubmit}>
             <div className="settingsPP">
-              <Image src={file ? previewUrl : userId ? userId.profilePic : ""} width={320} height={320} alt="foto perfil" />
+              <Image
+                src={file ? previewUrl : userId ? userId.profilePic : ""}
+                width={320}
+                height={320}
+                alt="foto perfil"
+              />
               <label htmlFor="fileInput">
                 <i className="settingsPPIcon">
                   <FontAwesomeIcon icon={faUserCircle} />

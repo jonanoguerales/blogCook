@@ -2,14 +2,18 @@
 import Link from "next/link";
 import "./login.css";
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "@/context/authContext";
 
 export default function Login() {
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const [success] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
   const router = useRouter();
+  const { setUser } = useContext(AuthContext);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios.defaults.withCredentials = true; // Asegúrate de que las cookies se incluyan en esta llamada
@@ -18,11 +22,16 @@ export default function Login() {
         username: userRef.current?.value,
         password: passwordRef.current?.value,
       });
+      if (res.data) {
+        setUser(res.data);
+      }
       if (res.status === 200) {
         router.push("/");
       }
+      setSuccess(false);
     } catch (err) {
       console.log(err);
+      setSuccess(true);
     }
   };
   return (
@@ -37,10 +46,10 @@ export default function Login() {
           </button>
           {success && (
             <span className="errorRegistro">
-              {/*<FontAwesomeIcon
+              <FontAwesomeIcon
                 icon={faExclamationTriangle}
                 className="espacio"
-              />*/}
+              />
               Usuario o contraseña incorrecto...
             </span>
           )}

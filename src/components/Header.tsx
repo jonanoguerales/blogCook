@@ -1,15 +1,37 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Logout } from "./Logout";
 import { useAuth } from "@/context/authContext";
+import { User } from "@/lib/interfaces";
+import axios from "axios";
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn] = useState(true);
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const { user } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [userId, setUserId] = useState<User>();
+  console.log(userId);
+  console.log(user);
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:3001/api/user/${user?.id}`
+        );
+        setUserId(res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUser();
+  }, [user]);
+
+  useEffect(() => {
+    setIsLoggedIn(!!user);
+  }, [user]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -114,7 +136,7 @@ export function Header() {
                 >
                   <Image
                     className="w-8 h-8 rounded-full"
-                    src="/docs/images/people/profile-picture-3.jpg"
+                    src={userId?.profilePic || "/user.png"}
                     alt="user photo"
                     width={32}
                     height={32}
@@ -151,13 +173,7 @@ export function Header() {
                       >
                         Perfil
                       </Link>
-                      <Link
-                        href="/login"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={closeProfileMenu}
-                      >
-                        <Logout />
-                      </Link>
+                      <Logout />
                     </div>
                   </div>
                 )}

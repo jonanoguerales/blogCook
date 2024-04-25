@@ -9,18 +9,18 @@ import { CardUsuariosPopularProps } from "@/lib/interfaces";
 
 export function CardUsuariosPopular(props: CardUsuariosPopularProps) {
   return (
-    <article className="rounded-xl border-2 border-gray-100 bg-white shadow-lg">
+    <article className="rounded-xl  bg-white shadow-lg w-[360px]">
       <div className="flex gap-8">
         <div className="pl-4 py-6">
           <Image
             alt="Imagen pefil de usuario"
             src={props.img}
-            className="w-28 h-44 rounded-lg object-cover"
+            className="min-w-28 h-44 rounded-lg object-cover"
             width={200}
             height={200}
           />
         </div>
-        <div>
+        <div className="w-full relative">
           <div className="flex flex-col gap-1 pr-4 pt-6">
             <h3 className="font-medium sm:text-lg">{props.usuario}</h3>
             <div className="flex items-center gap-1 text-gray-500 pt-2">
@@ -40,7 +40,7 @@ export function CardUsuariosPopular(props: CardUsuariosPopularProps) {
               <p className="text-xs">{props.likes} likes</p>
             </div>
           </div>
-          <div className="flex justify-end items-end pt-4">
+          <div className="absolute bottom-0 right-0">
             <strong className="-mb-[2px] -me-[2px] inline-flex items-center gap-1 rounded-ee-xl rounded-ss-xl bg-green-600 px-3 py-1.5 text-white">
               <CheckBadgeIcon className="h-6 w-6 text-green-700" />
 
@@ -51,7 +51,6 @@ export function CardUsuariosPopular(props: CardUsuariosPopularProps) {
           </div>
         </div>
       </div>
-
     </article>
   );
 }
