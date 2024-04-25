@@ -1,5 +1,4 @@
-import { CardPost } from "@/components/CardPost";
-import { Posts } from "@/lib/interfaces";
+import { PostsObtenidos } from "@/components/ObtenerPosts";
 
 async function getPosts() {
   const res = await fetch("http://localhost:3001/api/posts");
@@ -7,23 +6,9 @@ async function getPosts() {
   return data;
 }
 
-export async function PostsObtenidos() {
+export async function PostsTotales() {
   const posts = await getPosts();
   return (
-    <>
-      {posts.map((post: Posts) => (
-        <CardPost
-          key={post._id}
-          id={post._id}
-          titulo={post.title}
-          parrafo={post.desc}
-          img={post.photo}
-          categoria={post.categories}
-          autor={post.username}
-          fecha={post.createdAt}
-          bg={post.bg}
-        />
-      ))}
-    </>
+    <PostsObtenidos posts={posts} />
   );
-}
+} 

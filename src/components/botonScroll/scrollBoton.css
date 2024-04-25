@@ -1,0 +1,28 @@
+.top-to-btm {
+  position: relative;
+}
+.icon-position {
+  position: fixed;
+  bottom: 160px;
+  right: 45px;
+  z-index: 20;
+}
+.icon-style {
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+.icon-style:hover {
+  background: #fff;
+  color: #1f1e3d;
+}
+
+@media screen and (max-width: 480px) {
+  .icon-position {
+    right: 2px;
+    z-index: 20;
+  }
+}

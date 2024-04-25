@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { AuthProvider } from "@/context/authContext";
 import Footer from "@/components/footer/Footer";
+import ScrollTop from "@/components/botonScroll/ScrollBoton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <Header />
           <main className="bg-white mx-auto max-w-screen-3xl"> {children}</main>
           <Footer />
+          <ScrollTop />
         </AuthProvider>
       </body>
     </html>

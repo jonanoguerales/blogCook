@@ -1,12 +1,8 @@
+import { UserRole } from "@/lib/interfaces";
 import axios from "axios";
 
-type User = {
-    id: string,
-    role: string,
-    username: string,
-};
 
-export async function UpdateUser(props: User, type: "post" | "comment" | "like") {
+export async function UpdateUser(props: UserRole, type: "post" | "comment" | "like") {
     const res = await axios.get(`http://localhost:3001/api/user/${props.id}`);
     const data = await res.data;
     const users = data;

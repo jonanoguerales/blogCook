@@ -1,13 +1,17 @@
 "use client";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./settings.css";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Importamos el componente para poder utilizar los iconos
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons"; // El icono o iconos a utilizar
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "@/context/authContext";
+import { User } from "@/lib/interfaces";
+import { getUsers } from "../perfil/[id]/page";
+import Image from "next/image";
+
 
 const Settings = () => {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +19,30 @@ const Settings = () => {
   const [telefono, setTelefono] = useState("");
   const [success, setSuccess] = useState(false);
   const { user } = useAuth();
-  const PF = "https://apiblog-01g5.onrender.com/images/";
+  const [userId, setUserId] = useState<User | null>();
+  const [previewUrl, setPreviewUrl] = useState("");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await getUsers(user?.id ?? "");
+        console.log(response);
+        setUserId(response);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchUser();
+  }, [user?.id]);
+
+  useEffect(() => {
+    if (file) {
+      const newPreviewUrl = URL.createObjectURL(file);
+      setPreviewUrl(newPreviewUrl);
+
+      return () => URL.revokeObjectURL(newPreviewUrl);
+    }
+  }, [file]);
 
   const handleDelete = async () => {
     try {
@@ -25,7 +52,7 @@ const Settings = () => {
           data: { username: user?.username },
         }
       );
-    } catch (err) {}
+    } catch (err) { }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,23 +68,26 @@ const Settings = () => {
     };
     if (file) {
       const data = new FormData();
-      const filename = "asd";
-      data.append("name", filename);
       data.append("file", file);
-      updatedUser.profilePic = filename;
       try {
-        await axios.post("https://apiblog-01g5.onrender.com/api/upload", data);
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: data,
+        });
+        const datajson = await response.json();
+        updatedUser.profilePic = datajson.url;
       } catch (err) {
-        console.log(err);
+        console.error(err);
+        return;
       }
     }
     try {
-      const res = await axios.put(
-        "https://apiblog-01g5.onrender.com/api/users/" + user?.id,
+      await axios.put(
+        `https://apiblog-01g5.onrender.com/api/user/${user?.id}`,
         updatedUser
       );
       setSuccess(true);
-    } catch (err) {}
+    } catch (err) { }
   };
   return (
     <>
@@ -68,7 +98,7 @@ const Settings = () => {
           </div>
           <form className="settingsForm" onSubmit={handleSubmit}>
             <div className="settingsPP">
-              <img src={user?.username} alt="" />
+              <Image src={file ? previewUrl : userId ? userId.profilePic : ""} width={320} height={320} alt="foto perfil" />
               <label htmlFor="fileInput">
                 <i className="settingsPPIcon">
                   <FontAwesomeIcon icon={faUserCircle} />
@@ -78,9 +108,8 @@ const Settings = () => {
                 id="fileInput"
                 type="file"
                 style={{ display: "none" }}
-                className="settingsPPInput"
                 onChange={(e) => {
-                  if (e.target.files) {
+                  if (e.target.files && e.target.files[0] instanceof File) {
                     setFile(e.target.files[0]);
                   }
                 }}
@@ -90,19 +119,19 @@ const Settings = () => {
             <input
               type="text"
               required
-              placeholder={user?.username}
+              placeholder={userId?.username}
               onChange={(e) => setUsername(e.target.value)}
             />
             <label>Nombre completo</label>
             <input
               type="text"
-              placeholder={user?.username}
+              placeholder={userId?.nombre}
               onChange={(e) => setNombre(e.target.value)}
             />
             <label>Email</label>
             <input
               type="email"
-              placeholder={user?.username}
+              placeholder={userId?.email}
               required
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -115,7 +144,7 @@ const Settings = () => {
             <label>Teléfono</label>
             <input
               type="text"
-              placeholder={user?.username}
+              placeholder={userId?.telefono}
               onChange={(e) => setTelefono(e.target.value)}
             />
             <button className="settingsSubmitButton" type="submit">

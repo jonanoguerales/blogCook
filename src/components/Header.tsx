@@ -3,11 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Logout } from "./Logout";
+import { useAuth } from "@/context/authContext";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn] = useState(true);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const { user } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -143,7 +145,7 @@ export function Header() {
                         Ajustes
                       </Link>
                       <Link
-                        href="/perfil"
+                        href={`/perfil/${user?.id}`}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         onClick={closeProfileMenu}
                       >

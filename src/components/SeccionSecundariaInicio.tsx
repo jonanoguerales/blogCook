@@ -6,7 +6,7 @@ export async function SeccionSecundariaInicio() {
       <h2 className="text-4xl font-bold text-center pb-8">
         CATEGORIAS POPULARES
       </h2>
-      <article className="flex gap-7 justify-center">
+      <article className="flex flex-wrap gap-7 justify-center">
         <CardCategoria img="/1.jpg" categoria={"Carne"} bg="bg-red-500" />
         <CardCategoria img="/1.jpg" categoria={"Pescado"} bg="bg-sky-500" />
         <CardCategoria img="/1.jpg" categoria={"Pasta"} bg="bg-yellow-300" />

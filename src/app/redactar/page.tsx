@@ -45,7 +45,6 @@ export default function Redactar() {
   );
   const [selectedColor, setSelectedColor] = useState<string>("");
 
-  console.log(selectedColor);
   useEffect(() => {
     const fetchCategoryColors = async () => {
       const colors = await getCategoryColors();
@@ -100,7 +99,7 @@ export default function Redactar() {
         return;
       }
     }
-    console.log(newPost);
+
     try {
       const res = await axios.post("http://localhost:3001/api/posts", newPost);
       router.replace(`/posts/${res.data._id}`);

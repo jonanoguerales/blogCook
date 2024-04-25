@@ -1,5 +1,6 @@
 export interface User {
   _id: string;
+  username: string;
   nombre: string;
   email: string;
   password: string;
@@ -10,6 +11,7 @@ export interface User {
   numPosts: number;
   numComentarios: number;
   numLikes: number;
+  createdAt: string;
 }
 
 export interface State {
@@ -98,3 +100,9 @@ export interface Post {
 export interface SinglePostProps {
   id: string;
 }
+
+export type UserRole = {
+  id: string,
+  role: string,
+  username: string,
+};

@@ -1,0 +1,126 @@
+.single {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #e5e5e5;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.single .left {
+  display: flex;
+  width: 600px;
+  background-color: #f2f2f2;
+  border-radius: 30px;
+  padding: 20px;
+  position: relative;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 100px;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 24%);
+}
+
+.single .left .editButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #7551f818;
+  cursor: pointer;
+  border-radius: 0 30px 0 10px;
+}
+
+.single .left .editButton:hover {
+  background-color: #462da246;
+}
+
+.single .left .item {
+  display: flex;
+  gap: 90px;
+  align-items: center;
+  align-self: center;
+}
+
+.single .left .item .itemImg {
+  width: 150px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.single .left .item .details .itemTitle {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.single .left .item .details .detailItem {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.single .left .item .details .detailItem .itemKey {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.single .left .right {
+  flex: 1;
+}
+
+.single .left .bottom {
+  background-color: #272c4a;
+  border-radius: 30px;
+  padding: 20px;
+  margin: 30px 20px;
+}
+
+.single .left .title {
+  font-size: 25px;
+  padding: 5px !important;
+  font-weight: 600;
+  font-family: "Roboto";
+}
+
+.single .left .datatable {
+  width: 98%;
+}
+
+.single .bottom {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.single .bottom .lastPostTittle {
+  cursor: default;
+  font-family: "Roboto";
+  font-size: 60px;
+  text-align: center;
+  line-height: 100px;
+  margin-top: 50px;
+}
+.single .bottom .postsUser {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 630px) {
+  .single .left {
+    width: 350px;
+  }
+
+  .single .left .item {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+  }
+}
