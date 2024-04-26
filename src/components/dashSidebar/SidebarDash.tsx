@@ -16,7 +16,7 @@ const SidebarDash = () => {
     <div className="sidebarDash">
       <div className="topDash">
         <div className="lunita">
-          <Image src={lunita} alt="" />
+          <Image src={lunita} alt="icono luna" width={40} height={40} />
         </div>
         <span className="logo">Dashbo</span>
       </div>

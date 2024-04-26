@@ -115,7 +115,7 @@ export default function Redactar() {
         <Image
           className="writeImg"
           src={previewUrl}
-          alt=""
+          alt="Imagen previa de la receta"
           width={1280}
           height={720}
         />

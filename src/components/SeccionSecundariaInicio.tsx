@@ -7,12 +7,36 @@ export async function SeccionSecundariaInicio() {
         CATEGORIAS POPULARES
       </h2>
       <article className="flex flex-wrap gap-7 justify-center">
-        <CardCategoria img="/1.jpg" categoria={"Carne"} bg="bg-red-500" />
-        <CardCategoria img="/1.jpg" categoria={"Pescado"} bg="bg-sky-500" />
-        <CardCategoria img="/1.jpg" categoria={"Pasta"} bg="bg-yellow-300" />
-        <CardCategoria img="/1.jpg" categoria={"Verduras"} bg="bg-green-600" />
-        <CardCategoria img="/1.jpg" categoria={"Ensaladas"} bg="bg-lime-400" />
-        <CardCategoria img="/1.jpg" categoria={"Postres"} bg="bg-orange-300" />
+        <CardCategoria
+          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144147/carnes_-_Profile_Picture_thmfnj.png"
+          categoria={"Carne"}
+          bg="bg-red-500"
+        />
+        <CardCategoria
+          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144423/1_aniir3_-_Square_Post_oeeoa0.png"
+          categoria={"Pescado"}
+          bg="bg-sky-500"
+        />
+        <CardCategoria
+          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144154/pastas_-_Profile_Picture_xyzaum.png"
+          categoria={"Pasta"}
+          bg="bg-yellow-300"
+        />
+        <CardCategoria
+          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144160/verduras_-_Profile_Picture_xkgxqk.png"
+          categoria={"Verduras"}
+          bg="bg-green-600"
+        />
+        <CardCategoria
+          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144150/ensaladas_-_Profile_Picture_ult3rg.png"
+          categoria={"Ensaladas"}
+          bg="bg-lime-400"
+        />
+        <CardCategoria
+          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144157/postres_-_Profile_Picture_tfmmoz.png"
+          categoria={"Postres"}
+          bg="bg-orange-300"
+        />
       </article>
     </section>
   );

@@ -9,7 +9,7 @@ export function SeccionPrimeraInicio() {
             <div className="relative h-64 sm:h-80 lg:h-full">
               <Image
                 alt="Imagen de la receta"
-                src="/1.jpg"
+                src="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144423/1_aniir3_-_Square_Post_oeeoa0.png"
                 className="absolute inset-0 h-full w-full object-cover lg:rounded-lg rounded-t-lg shadow-xl"
                 width={1080}
                 height={720}

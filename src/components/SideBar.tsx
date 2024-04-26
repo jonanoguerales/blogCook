@@ -4,6 +4,7 @@ import axios from "axios";
 import { CardPopulares } from "./CardPopulares";
 import { CardUsuariosPopular } from "./CardUsuariosPopular";
 import { Posts, User } from "@/lib/interfaces";
+import { getPosts } from "./GetPosts";
 
 export function SiderBar() {
   const [users, setUsers] = useState([]);
@@ -14,8 +15,10 @@ export function SiderBar() {
       try {
         const res = await axios.get("http://localhost:3001/api/users");
         const data = res.data;
-        const usersWithPosts = data.filter((user: User) => user.numPosts > 0);
-        const topUsers = usersWithPosts.sort((a: User, b: User) => b.numPosts - a.numPosts).slice(0, 3);
+        const usersWithPosts = data.filter((user: User) => user.numPosts >= 0);
+        const topUsers = usersWithPosts
+          .sort((a: User, b: User) => b.numPosts - a.numPosts)
+          .slice(0, 3);
         setUsers(topUsers);
       } catch (error) {
         console.error("Error al obtener los usuarios:", error);
@@ -28,9 +31,10 @@ export function SiderBar() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get("http://localhost:3001/api/posts");
-        const data = res.data;
-        const topPosts = data.sort((a: Posts, b: Posts) => b.numLikes - a.numLikes).slice(0, 3);
+        const data = await getPosts();
+        const topPosts = data
+          .sort((a: Posts, b: Posts) => b.numLikes - a.numLikes)
+          .slice(0, 3);
         const postsWithShortDescription = topPosts.map((post: Posts) => {
           const descriptionWords = post.desc.split(" ");
           const shortDescription = descriptionWords.slice(0, 10).join(" ");
