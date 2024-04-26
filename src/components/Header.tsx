@@ -13,8 +13,6 @@ export function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [userId, setUserId] = useState<User>();
-  console.log(userId);
-  console.log(user);
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -67,7 +65,7 @@ export function Header() {
 
           <div className="hidden md:block float-end">
             <nav aria-label="Global">
-              <ul className="flex items-center gap-6 text-sm">
+              <ul className="flex items-center gap-6 text-sm  font-semibold">
                 <li>
                   <Link
                     className="text-gray-900 transition hover:text-gray-500/75 text-xl"
@@ -131,15 +129,15 @@ export function Header() {
               <div className="relative">
                 <button
                   type="button"
-                  className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                  className="flex text-sm rounded-full md:me-0"
                   onClick={toggleProfileMenu}
                 >
                   <Image
-                    className="w-8 h-8 rounded-full"
+                    className="size-12 rounded-full "
                     src={userId?.profilePic || "/user.png"}
                     alt="user photo"
-                    width={32}
-                    height={32}
+                    width={1280}
+                    height={800}
                   />
                 </button>
                 {isProfileMenuOpen && (
