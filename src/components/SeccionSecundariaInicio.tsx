@@ -13,7 +13,7 @@ export async function SeccionSecundariaInicio() {
           bg="bg-red-500"
         />
         <CardCategoria
-          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144423/1_aniir3_-_Square_Post_oeeoa0.png"
+          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144423/pescado.png"
           categoria={"Pescado"}
           bg="bg-sky-500"
         />
