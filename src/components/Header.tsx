@@ -4,32 +4,18 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Logout } from "./Logout";
 import { useAuth } from "@/context/authContext";
-import { User } from "@/lib/interfaces";
-import axios from "axios";
 
 export function Header() {
   const { user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const [userId, setUserId] = useState<User>();
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const res = await axios.get(
-          `http://localhost:3001/api/user/${user?.id}`
-        );
-        setUserId(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getUser();
-  }, [user]);
 
   useEffect(() => {
     setIsLoggedIn(!!user);
+    setIsProfileMenuOpen(false);
   }, [user]);
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -134,7 +120,7 @@ export function Header() {
                 >
                   <Image
                     className="size-12 rounded-full "
-                    src={userId?.profilePic || "/user.png"}
+                    src={user?.picture || "/usu.webp"}
                     alt="user photo"
                     width={1280}
                     height={800}

@@ -16,19 +16,19 @@ export default function Login() {
   const { setUser } = useContext(AuthContext);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    axios.defaults.withCredentials = true; // Asegúrate de que las cookies se incluyan en esta llamada
+    axios.defaults.withCredentials = true;
     try {
       const res = await axios.post("http://localhost:3001/api/auth/login", {
         username: userRef.current?.value,
         password: passwordRef.current?.value,
       });
       if (res.data) {
-        setUser(res.data);
+        if (res.status === 200) {
+          setUser(res.data);
+          setSuccess(false);
+          router.push("/");
+        }
       }
-      if (res.status === 200) {
-        router.push("/");
-      }
-      setSuccess(false);
     } catch (err) {
       console.log(err);
       setSuccess(true);

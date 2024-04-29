@@ -15,21 +15,27 @@ export async function SeccionSecundariaInicio() {
             bg="bg-red-500"
           />
         </Link>
-        <CardCategoria
-          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144423/pescado.png"
-          categoria={"Pescado"}
-          bg="bg-sky-500"
-        />
-        <CardCategoria
-          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144154/pastas.png"
-          categoria={"Pasta"}
-          bg="bg-yellow-300"
-        />
-        <CardCategoria
-          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144160/verduras.png"
-          categoria={"Verduras"}
-          bg="bg-green-600"
-        />
+        <Link href="/categorias/Pescado">
+          <CardCategoria
+            img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144423/pescado.png"
+            categoria={"Pescado"}
+            bg="bg-sky-500"
+          />
+        </Link>
+        <Link href="/categorias/Pasta">
+          <CardCategoria
+            img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144154/pastas.png"
+            categoria={"Pasta"}
+            bg="bg-yellow-300"
+          />
+        </Link>
+        <Link href="/categorias/Verduras">
+          <CardCategoria
+            img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144160/verduras.png"
+            categoria={"Verduras"}
+            bg="bg-green-600"
+          />
+        </Link>
         <Link href="/categorias/Ensaladas">
           <CardCategoria
             img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144150/ensaladas.png"
@@ -37,11 +43,13 @@ export async function SeccionSecundariaInicio() {
             bg="bg-lime-400"
           />
         </Link>
-        <CardCategoria
-          img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144157/postres.png"
-          categoria={"Postres"}
-          bg="bg-orange-300"
-        />
+        <Link href="/categorias/Postres">
+          <CardCategoria
+            img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144157/postres.png"
+            categoria={"Postres"}
+            bg="bg-orange-300"
+          />
+        </Link>
       </article>
     </section>
   );

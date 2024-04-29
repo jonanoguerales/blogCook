@@ -101,7 +101,7 @@ export default function Redactar() {
     }
 
     try {
-      const res = await axios.post("http://localhost:3001/api/posts", newPost);
+      const res = await axios.post("http://localhost:3001/api/post", newPost);
       router.replace(`/posts/${res.data._id}`);
       await UpdateUser(user, "post");
     } catch (err) {

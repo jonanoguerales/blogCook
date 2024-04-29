@@ -12,6 +12,7 @@ type User = {
   id: string;
   role: string;
   username: string;
+  picture?: string;
 };
 
 type AuthContextType = {
@@ -21,7 +22,7 @@ type AuthContextType = {
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
-  setUser: () => {},
+  setUser: () => { },
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {

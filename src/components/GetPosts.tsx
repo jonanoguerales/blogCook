@@ -1,23 +1,42 @@
+"use client";
+import React, { useEffect, useState } from "react";
 import { Posts } from "@/lib/interfaces";
+import { CardPost } from "./CardPost";
+import { getPosts } from "@/lib/api"; // Importar la función getPosts desde el archivo api.ts
 
-export async function getPosts() {
-  try {
-    const res = await fetch("http://localhost:3001/api/posts");
-    if (!res.ok) {
-      throw new Error(
-        `Error al obtener los posts: ${res.status} ${res.statusText}`
-      );
+export function GetPosts() {
+  const [posts, setPosts] = useState<Posts[]>([]);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const data = await getPosts(); // Utilizar la función getPosts para obtener los posts
+        setPosts(data);
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
     }
-    const data = await res.json();
 
-    // Formatear la fecha de creación en formato 'es-ES'
-    data.forEach((post: Posts) => {
-      post.createdAt = new Date(post.createdAt).toLocaleDateString("es-ES");
-    });
+    fetchPosts();
+  }, []);
 
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  return (
+    <>
+      {posts.map((post: Posts) => (
+        <CardPost
+          key={post._id}
+          id={post._id}
+          titulo={post.title}
+          parrafo={post.desc}
+          img={post.photo}
+          categoria={post.categories}
+          autor={post.username}
+          fecha={post.createdAt}
+          bg={post.bg}
+        />
+      ))}
+    </>
+  );
 }
+

@@ -4,7 +4,7 @@ import axios from "axios";
 import { CardPopulares } from "./CardPopulares";
 import { CardUsuariosPopular } from "./CardUsuariosPopular";
 import { Posts, User } from "@/lib/interfaces";
-import { getPosts } from "./GetPosts";
+import { getPosts } from "@/lib/api";
 
 export function SiderBar() {
   const [users, setUsers] = useState([]);

@@ -10,6 +10,7 @@ import { useAuth } from "@/context/authContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Comments from "../comments/Comments";
 
 const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
   const [post, setPost] = useState<Post | null>(null);
@@ -25,7 +26,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
     const getPost = async () => {
       if (typeof id === "string") {
         try {
-          const res = await axios.get(`http://localhost:3001/api/posts/${id}`);
+          const res = await axios.get(`http://localhost:3001/api/post/${id}`);
           setPost(res.data);
           setTitle(res.data.title);
           setDesc(res.data.desc);
@@ -174,7 +175,9 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
           </button>
         )}
       </div>
+      <Comments post={post} />
     </div>
+
   );
 };
 
