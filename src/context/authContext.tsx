@@ -1,7 +1,6 @@
 "use client";
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 type User = {
   id: string;
@@ -22,6 +21,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState(null);
   const [logeado, setLogeado] = useState(false);
 
+  console.log(user);
+  console.log(logeado);
   useEffect(() => {
     const verifyUser = async () => {
       try {
@@ -29,41 +30,30 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           withCredentials: true,
         });
         setUser(response.data.validToken);
+        setLogeado(true);
       } catch (error) {
         console.error('Error al verificar el usuario', error);
+        setLogeado(false);
       }
     };
-
-    if (logeado === true) {
-      verifyUser();
-    } else {
-      setLogeado(false);
-    }
+    verifyUser();
   }, [logeado]);
 
   const login = async (username: string, password: string): Promise<Boolean> => {
     try {
-      const response = await axios.post('http://localhost:3001/api/auth/login', { username, password }, { withCredentials: true, });
-
-      const { token } = response.data;
-
-      if (token) {
-        setUser(response.data.user);
-        Cookies.set('token', token, { expires: 7 });
-      }
+      await axios.post('http://localhost:3001/api/auth/login', { username, password }, { withCredentials: true, });
       setLogeado(true);
-
+      return true;
     } catch (error) {
       console.error('Error al iniciar sesión', error);
+      return false;
     }
-    return true;
-
   }
 
   async function logout() {
+    await axios.post("http://localhost:3001/api/auth/logout", { withCredentials: true, });
     setUser(null);
     setLogeado(false);
-    await axios.post("http://localhost:3001/api/auth/logout", { withCredentials: true, });
   };
 
   return (

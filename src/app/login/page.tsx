@@ -28,12 +28,13 @@ export default function Login() {
     axios.defaults.withCredentials = true;
     try {
       const respuesta = await login(username, password);
-      if (!respuesta) {
-        setSuccess(true);
-      } else {
+      if (respuesta) {
         setSuccess(false);
         router.push("/");
+      } else {
+        setSuccess(true);
       }
+
     } catch (err) {
       console.log(err);
     }

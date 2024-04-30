@@ -1,6 +1,7 @@
 import { SeccionPrimeraInicio } from "@/components/SeccionPrimeraInicio";
 import { SeccionSecundariaInicio } from "@/components/SeccionSecundariaInicio";
 import SeccionTerceraInicio from "@/components/SeccionTerceraInicio";
+import { DialogDefault } from "@/components/ModalAdvert";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <SeccionPrimeraInicio />
       <SeccionSecundariaInicio />
       <SeccionTerceraInicio />
+      <DialogDefault />
     </>
   );
 }

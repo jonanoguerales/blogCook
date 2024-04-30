@@ -27,6 +27,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/auth.js"
-  ],
+, "src/components/ModalAdvert.jsx"  ],
   "exclude": ["node_modules"]
 }
