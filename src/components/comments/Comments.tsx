@@ -4,16 +4,17 @@ import { useState } from "react";
 import Commentario from "../comment/Commentario";
 import "./comments.css";
 import { useAuth } from "@/context/authContext";
+import { Post } from "@/lib/interfaces";
 
-const Comments = ({ post }) => {
+const Comments = ({ post }: { post: Post }) => {
   const [comment, setComment] = useState("");
   const [click, setClick] = useState(false);
   const { user } = useAuth();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newComment = {
-      name: user.username,
+      name: user && user.username,
       id_post: post._id,
       comment,
     };
@@ -26,7 +27,7 @@ const Comments = ({ post }) => {
   return (
     <>
       <div className="commentSecti">
-        <Commentario post={post} click={click} />
+        <Commentario post={post as Post} click={click} />
       </div>
       <div className="comments">
         <form className="commentForm" onSubmit={handleSubmit}>
@@ -41,14 +42,14 @@ const Comments = ({ post }) => {
             autoComplete="off"
             className="writeText"
             placeholder="Comentario..."
-            type="text"
+            typeof="text"
             autoFocus
             onChange={(e) => setComment(e.target.value)}
           />
           <button
             className="commentBTN"
             type="submit"
-            onClick={() => setClick((state) => !state)}
+            onClick={() => setClick(!click)}
           >
             Dejar comentario
           </button>

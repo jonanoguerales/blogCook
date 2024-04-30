@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Comments from "../comments/Comments";
+import { DialogDefault } from "../ModalAdvert";
 
 const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
   const [post, setPost] = useState<Post | null>(null);
@@ -48,6 +49,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
   }, [file]);
 
   const handleDelete = async () => {
+
     if (post) {
       try {
         await axios.delete(`http://localhost:3001/api/posts/${id}`, {
@@ -143,8 +145,8 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
                 <FontAwesomeIcon
                   icon={faTrash}
                   className="singlePostIcon"
-                  onClick={handleDelete}
                 />
+                <DialogDefault />
               </div>
             )}
           </div>
@@ -175,7 +177,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
           </button>
         )}
       </div>
-      <Comments post={post} />
+      <Comments post={post as Post} />
     </div>
 
   );

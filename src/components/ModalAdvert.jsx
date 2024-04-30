@@ -8,10 +8,23 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 
-export function DialogDefault() {
+export function DialogDefault(post) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(!open);
+
+  const handleDelete = async () => {
+    if (post) {
+      try {
+        await axios.delete(`http://localhost:3001/api/posts/${id}`, {
+          data: { username: user?.username },
+        });
+        router.push("/");
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   return (
     <>
@@ -20,12 +33,7 @@ export function DialogDefault() {
       </Button>
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>Its a simple dialog.</DialogHeader>
-        <DialogBody>
-          The key to more success is to have a lot of pillows. Put it this way,
-          it took me twenty five years to get these plants, twenty five years of
-          blood sweat and tears, and I&apos;m never giving up, I&apos;m just
-          getting started. I&apos;m up to something. Fan luv.
-        </DialogBody>
+        <DialogBody>¿Estas seguro de que quieres borrar este post?</DialogBody>
         <DialogFooter>
           <Button
             variant="text"
@@ -35,7 +43,7 @@ export function DialogDefault() {
           >
             <span>Cancel</span>
           </Button>
-          <Button variant="gradient" color="green" onClick={handleOpen}>
+          <Button variant="gradient" color="green" onClick={handleDelete}>
             <span>Confirm</span>
           </Button>
         </DialogFooter>
