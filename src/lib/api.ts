@@ -44,3 +44,19 @@ export async function getPostsCategorias(category: string) {
     throw error;
   }
 }
+
+export async function getUser(id: string) {
+  try {
+    const res = await axios.get(`http://localhost:3001/api/user/${id}`);
+    if (res.status !== 200) {
+      throw new Error(
+        `Error al obtener el usuario: ${res.status} ${res.statusText}`
+      );
+    }
+    const data = res.data;
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

@@ -10,12 +10,20 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [imagen, setImagen] = useState("");
 
   useEffect(() => {
-    setIsLoggedIn(!!user);
-    setIsProfileMenuOpen(false);
-  }, [user]);
+    if (user) {
+      setIsLoggedIn(true);
+      closeProfileMenu();
+    } else {
+      setIsLoggedIn(false);
+    }
 
+    if (user?.picture) {
+      setImagen(user?.picture);
+    }
+  }, [user]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -120,7 +128,7 @@ export function Header() {
                 >
                   <Image
                     className="size-12 rounded-full "
-                    src={user?.picture || "/usu.webp"}
+                    src={imagen || "/usu.webp"}
                     alt="user photo"
                     width={1280}
                     height={800}

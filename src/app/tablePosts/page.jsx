@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./tablePosts.css";
-import SidebarDash from "../../components/dashSidebar/SidebarDash";
 
 function Posts() {
   const [posts, setPosts] = useState([]);

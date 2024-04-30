@@ -4,14 +4,9 @@ import "./perfil.css";
 import axios from "axios";
 import Image from "next/image";
 
-export async function getUsers(id: string) {
-  const res = await axios.get(`http://localhost:3001/api/user/${id}`);
-  const data = await res.data;
-  return data;
-}
-
 async function SingleUser({ params: { id } }: { params: { id: string } }) {
-  const user = await getUsers(id);
+  const res = await axios.get(`http://localhost:3001/api/user/${id}`);
+  const user = res.data;
 
   return (
     <>

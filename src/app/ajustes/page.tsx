@@ -1,13 +1,13 @@
 "use client";
-import React, { useState, useContext, useEffect } from "react";
-import "./settings.css";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "@/context/authContext";
 import { User } from "@/lib/interfaces";
-import { getUsers } from "../perfil/[id]/page";
 import Image from "next/image";
+import { getUser } from "@/lib/api";
+import "./settings.css";
 
 const Settings = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -24,7 +24,7 @@ const Settings = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await getUsers(user?.id ?? "");
+        const response = await getUser(user?.id ?? "");
         setUserId(response);
       } catch (err) {
         console.error(err);
@@ -50,7 +50,7 @@ const Settings = () => {
           data: { username: user?.username },
         }
       );
-    } catch (err) {}
+    } catch (err) { }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -85,7 +85,7 @@ const Settings = () => {
         updatedUser
       );
       setSuccess(true);
-    } catch (err) {}
+    } catch (err) { }
   };
   return (
     <>

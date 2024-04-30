@@ -2,36 +2,40 @@
 import Link from "next/link";
 import "./login.css";
 import axios from "axios";
-import { useContext, useRef, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
-import { AuthContext } from "@/context/authContext";
+import { useAuth } from "@/context/authContext";
 
 export default function Login() {
-  const userRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
   const [success, setSuccess] = useState<boolean>(false);
   const router = useRouter();
-  const { setUser } = useContext(AuthContext);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const { login, user } = useAuth();
+
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios.defaults.withCredentials = true;
     try {
-      const res = await axios.post("http://localhost:3001/api/auth/login", {
-        username: userRef.current?.value,
-        password: passwordRef.current?.value,
-      });
-      if (res.data) {
-        if (res.status === 200) {
-          setUser(res.data);
-          setSuccess(false);
-          router.push("/");
-        }
+      const respuesta = await login(username, password);
+      if (!respuesta) {
+        setSuccess(true);
+      } else {
+        setSuccess(false);
+        router.push("/");
       }
     } catch (err) {
       console.log(err);
-      setSuccess(true);
     }
   };
   return (
@@ -39,8 +43,8 @@ export default function Login() {
       <h1>Inicio de Sesión</h1>
       <div className="loginForm">
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Nombre de usuario" ref={userRef} />
-          <input type="password" placeholder="Contraseña" ref={passwordRef} />
+          <input type="text" placeholder="Nombre de usuario" onChange={handleUsernameChange} />
+          <input type="password" placeholder="Contraseña" onChange={handlePasswordChange} />
           <button className="loginBtn" type="submit">
             Iniciar Sesión
           </button>
