@@ -84,6 +84,7 @@ export default function Redactar() {
       photo: "",
       bg: selectedColor,
     };
+    console.log(newPost);
     if (file) {
       const data = new FormData();
       data.append("file", file);

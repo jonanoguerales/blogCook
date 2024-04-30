@@ -4,17 +4,6 @@ import axios from "axios";
 import "./tableUsers.css";
 import SidebarDash from "../../components/dashSidebar/SidebarDash";
 
-import {
-  Table,
-  Button,
-  Container,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  FormGroup,
-  ModalFooter,
-} from "reactstrap";
-
 function Users() {
   const [users, setUsers] = useState([]);
   const PF = "http://localhost:3001/images/";
@@ -100,156 +89,60 @@ function Users() {
   return (
     <>
       <div className="tablas">
-        <SidebarDash />
         <div className="tablasContainer">
-          <Container>
-            <br />
-            <h2 className="registerUsersTitle">Usuarios Registrados</h2>
-            <br />
-            <Table className="myTable">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Imagen Perfil</th>
-                  <th>Usuario</th>
-                  <th>Nombre</th>
-                  <th>email</th>
-                  <th>Teléfono</th>
-                  <th>Role</th>
-                  <th>Creacion</th>
+          <br />
+          <h2 className="registerUsersTitle">Usuarios Registrados</h2>
+          <br />
+          <table className="myTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Imagen Perfil</th>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>email</th>
+                <th>Teléfono</th>
+                <th>Role</th>
+                <th>Creacion</th>
+              </tr>
+            </thead>
+
+            <tbody className="tbdoyEdit">
+              {users.map((elemento) => (
+                <tr key={elemento._id}>
+                  <td>{elemento._id.slice(0, 5)}</td>
+                  <td>
+                    <img
+                      className="imgPost"
+                      src={PF + elemento.profilePic}
+                      alt=""
+                    />
+                  </td>
+                  <td>{elemento.username}</td>
+                  <td>{elemento.nombre}</td>
+                  <td>{elemento.email}</td>
+                  <td>{elemento.telefono}</td>
+                  <td>{elemento.role}</td>
+                  <td>{new Date(elemento.createdAt).toDateString()}</td>
+                  <td>
+                    <button
+                      color="primary"
+                      onClick={() => seleccionarUser(elemento, "Editar")}
+                    >
+                      Editar
+                    </button>{" "}
+                    <button
+                      color="danger"
+                      onClick={() => seleccionarUser(elemento, "Eliminar")}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-
-              <tbody className="tbdoyEdit">
-                {users.map((elemento) => (
-                  <tr key={elemento._id}>
-                    <td>{elemento._id.slice(0, 5)}</td>
-                    <td>
-                      <img
-                        className="imgPost"
-                        src={PF + elemento.profilePic}
-                        alt=""
-                      />
-                    </td>
-                    <td>{elemento.username}</td>
-                    <td>{elemento.nombre}</td>
-                    <td>{elemento.email}</td>
-                    <td>{elemento.telefono}</td>
-                    <td>{elemento.role}</td>
-                    <td>{new Date(elemento.createdAt).toDateString()}</td>
-                    <td>
-                      <Button
-                        color="primary"
-                        onClick={() => seleccionarUser(elemento, "Editar")}
-                      >
-                        Editar
-                      </Button>{" "}
-                      <Button
-                        color="danger"
-                        onClick={() => seleccionarUser(elemento, "Eliminar")}
-                      >
-                        Eliminar
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </Container>
+              ))}
+            </tbody>
+          </table>
         </div>
-
-        <Modal isOpen={modalEditar}>
-          <ModalHeader>
-            <div>
-              <h3>Editar Usuario</h3>
-            </div>
-          </ModalHeader>
-
-          <ModalBody>
-            <FormGroup>
-              <label>Nombre</label>
-              <input
-                className="form-control"
-                type="text"
-                name="nombre"
-                value={userSeleccionado ? userSeleccionado.nombre : ""}
-                onChange={handleChange}
-              />
-
-              <label>Usuario</label>
-              <input
-                className="form-control"
-                type="text"
-                name="username"
-                value={userSeleccionado ? userSeleccionado.username : ""}
-                onChange={handleChange}
-              />
-
-              <label>Email</label>
-              <input
-                className="form-control"
-                type="email"
-                name="email"
-                value={userSeleccionado ? userSeleccionado.email : ""}
-                onChange={handleChange}
-              />
-
-              <label>Role</label>
-              <input
-                className="form-control"
-                type="text"
-                name="role"
-                value={userSeleccionado ? userSeleccionado.role : ""}
-                onChange={handleChange}
-              />
-
-              <label>Telefono</label>
-              <input
-                className="form-control"
-                type="number"
-                name="telefono"
-                value={userSeleccionado ? userSeleccionado.telefono : ""}
-                onChange={handleChange}
-              />
-
-              <label>Imagen</label>
-              <input
-                className="form-control"
-                type="text"
-                name="profilePic"
-                value={userSeleccionado ? userSeleccionado.profilePic : ""}
-                onChange={handleChange}
-              />
-            </FormGroup>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button color="primary" onClick={() => handleUpdate()}>
-              Editar
-            </Button>
-            <Button color="danger" onClick={() => setModalEditar(false)}>
-              Cancelar
-            </Button>
-          </ModalFooter>
-        </Modal>
-
-        <Modal isOpen={modalEliminar}>
-          <ModalBody>
-            Estás seguro que deseas eliminar este usuario{" "}
-            {userSeleccionado && userSeleccionado.nombre}
-          </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-danger" onClick={() => handleDelete()}>
-              Sí
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => setModalEliminar(false)}
-            >
-              No
-            </button>
-          </ModalFooter>
-        </Modal>
       </div>
     </>
   );
