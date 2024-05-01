@@ -1,5 +1,6 @@
 import { GetPosts } from "@/components/GetPosts";
 
-export async function PostsTotales() {
+const PostsTotales = async () => {
   return <GetPosts />;
-}
+};
+export default PostsTotales;
