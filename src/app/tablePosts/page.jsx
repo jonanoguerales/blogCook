@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./tablePosts.css";
+import Image from "next/image";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
@@ -107,10 +108,12 @@ function Posts() {
                 <tr key={elemento._id}>
                   <td>{elemento._id.slice(0, 5)}</td>
                   <td>
-                    <img
+                    <Image
                       className="imgPost"
                       src={elemento.photo}
                       alt="imagen photo"
+                      width={100}
+                      height={100}
                     />
                   </td>
                   <td>{elemento.title}</td>

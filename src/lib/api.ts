@@ -1,5 +1,6 @@
 import { Posts } from "@/lib/interfaces";
 import axios from "axios";
+import { User } from "@/lib/interfaces";
 
 export async function getPosts() {
   try {
@@ -53,8 +54,36 @@ export async function getUser(id: string) {
         `Error al obtener el usuario: ${res.status} ${res.statusText}`
       );
     }
-    const data = res.data;
-    return data;
+    const data: User = res.data;
+
+    const user = {
+      ...data,
+      createdAt: new Date(data.createdAt).toLocaleDateString("es-ES"),
+    };
+
+    return user;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getComentarios(id: string) {
+  try {
+    const res = await axios.get("http://localhost:3001/api/comments");
+    if (res.status !== 200) {
+      throw new Error(
+        `Error al obtener comentarios: ${res.status} ${res.statusText}`
+      );
+    }
+    const data: User = res.data;
+
+    const user = {
+      ...data,
+      createdAt: new Date(data.createdAt).toLocaleDateString("es-ES"),
+    };
+
+    return user;
   } catch (error) {
     console.error(error);
     throw error;

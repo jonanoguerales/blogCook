@@ -8,6 +8,7 @@ import { User } from "@/lib/interfaces";
 import Image from "next/image";
 import { getUser } from "@/lib/api";
 import "./settings.css";
+import { useRouter } from "next/navigation";
 
 const Settings = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -20,6 +21,7 @@ const Settings = () => {
   const { user } = useAuth();
   const [userId, setUserId] = useState<User | null>();
   const [previewUrl, setPreviewUrl] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -44,25 +46,25 @@ const Settings = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `https://apiblog-01g5.onrender.com/api/users/${user?.id}`,
-        {
-          data: { username: user?.username },
-        }
-      );
-    } catch (err) { }
+      await axios.delete(`http://localhost:3001/api/user/${user?.id}`, {
+        data: { username: user?.username },
+      });
+      router.replace("/");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const updatedUser = {
       userId: user?.id,
-      username,
-      email,
-      password,
-      nombre,
-      telefono,
-      profilePic: "",
+      username: username ? username : userId?.username,
+      email: email ? email : userId?.email,
+      password: password ? password : userId?.password,
+      nombre: nombre ? nombre : userId?.nombre,
+      telefono: telefono ? telefono : userId?.telefono,
+      profilePic: "" || userId?.profilePic,
     };
     if (file) {
       const data = new FormData();
@@ -81,11 +83,14 @@ const Settings = () => {
     }
     try {
       await axios.put(
-        `https://apiblog-01g5.onrender.com/api/user/${user?.id}`,
+        `http://localhost:3001/api/user/${user?.id}`,
         updatedUser
       );
       setSuccess(true);
-    } catch (err) { }
+      router.replace("/");
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <>
@@ -121,7 +126,6 @@ const Settings = () => {
             <label>Nombre de usuario</label>
             <input
               type="text"
-              required
               placeholder={userId?.username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -135,13 +139,11 @@ const Settings = () => {
             <input
               type="email"
               placeholder={userId?.email}
-              required
               onChange={(e) => setEmail(e.target.value)}
             />
             <label>Contraseña</label>
             <input
               type="password"
-              required
               onChange={(e) => setPassword(e.target.value)}
             />
             <label>Teléfono</label>

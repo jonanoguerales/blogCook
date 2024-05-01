@@ -20,23 +20,24 @@ interface CommentarioProps {
 const Commentario = ({ post, click }: CommentarioProps) => {
   const [comments, setComments] = useState<Comment[]>([]);
 
-  // If post is null, postId will be an empty string, otherwise it will be post._id
-  const postId = post ? post._id : '';
+  const postId = post ? post._id : "";
 
   useEffect(() => {
     const fetchComments = async () => {
-      const res = await axios.get<Comment[]>("http://localhost:3001/api/comments");
+      const res = await axios.get<Comment[]>(
+        "http://localhost:3001/api/comments"
+      );
       setComments(res.data);
     };
 
-    // Only fetch comments if postId is not an empty string
     if (postId) {
       fetchComments();
     }
-  }, [click, postId]); // Add postId as a dependency
+  }, [click, postId]);
 
-  // Filter comments only if postId is not an empty string
-  const filteredComments = postId ? comments.filter((comm) => comm.id_post === postId) : [];
+  const filteredComments = postId
+    ? comments.filter((comm) => comm.id_post === postId)
+    : [];
 
   return (
     <>

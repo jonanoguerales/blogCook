@@ -8,24 +8,24 @@ export async function SeccionSecundariaInicio() {
         CATEGORIAS POPULARES
       </h2>
       <article className="flex flex-wrap gap-7 justify-center">
-        <Link href="/categorias/Carne">
+        <Link href="/categorias/Carnes">
           <CardCategoria
             img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144147/carnes.png"
-            categoria={"Carne"}
+            categoria={"Carnes"}
             bg="bg-red-500"
           />
         </Link>
-        <Link href="/categorias/Pescado">
+        <Link href="/categorias/Pescados">
           <CardCategoria
             img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144423/pescado.png"
-            categoria={"Pescado"}
-            bg="bg-sky-500"
+            categoria={"Pescados"}
+            bg="bg-blue-200"
           />
         </Link>
-        <Link href="/categorias/Pasta">
+        <Link href="/categorias/Pastas">
           <CardCategoria
             img="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144154/pastas.png"
-            categoria={"Pasta"}
+            categoria={"Pastas"}
             bg="bg-yellow-300"
           />
         </Link>

@@ -8,6 +8,7 @@ import { UpdateUser } from "@/components/UpdateUser";
 import "./redactar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
+import { ImagePlacehoderSkeleton } from "@/components/skeletons/SkeletonImg";
 
 const getCategoryColors = async () => {
   try {
@@ -35,7 +36,7 @@ const getCategoryColors = async () => {
 export default function Redactar() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [categories, setCategories] = useState("Carne");
+  const [categories, setCategories] = useState("Carnes");
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const router = useRouter();
@@ -84,7 +85,6 @@ export default function Redactar() {
       photo: "",
       bg: selectedColor,
     };
-    console.log(newPost);
     if (file) {
       const data = new FormData();
       data.append("file", file);
@@ -112,15 +112,18 @@ export default function Redactar() {
 
   return (
     <div className="write mx-auto max-w-screen-3xl">
-      {file && (
+      {file ? (
         <Image
-          className="writeImg"
+          className="writeImg w-[40%] h-[253px]"
           src={previewUrl}
           alt="Imagen previa de la receta"
           width={1280}
           height={720}
         />
+      ) : (
+        <ImagePlacehoderSkeleton />
       )}
+
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
           <label htmlFor="fileInput" className="inputImagePlus">
@@ -159,15 +162,15 @@ export default function Redactar() {
             name="categorias"
             id="categorias"
             autoFocus
-            defaultValue="Carne"
+            defaultValue="Carnes"
             onChange={(e) => {
               setCategories(e.target.value);
               setSelectedColor(categoryColors[e.target.value]);
             }}
           >
-            <option value="Carne">Carne</option>
-            <option value="Pescado">Pescado</option>
-            <option value="Pasta">Pasta</option>
+            <option value="Carnes">Carnes</option>
+            <option value="Pescados">Pescados</option>
+            <option value="Pastas">Pastas</option>
             <option value="Verduras">Verduras</option>
             <option value="Ensaladas">Ensaladas</option>
             <option value="Postres">Postres</option>

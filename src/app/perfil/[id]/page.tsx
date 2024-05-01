@@ -1,12 +1,11 @@
 import Link from "next/link";
 import UserPosts from "@/components/ObtenerPostsUser";
 import "./perfil.css";
-import axios from "axios";
 import Image from "next/image";
+import { getUser } from "@/lib/api";
 
 async function SingleUser({ params: { id } }: { params: { id: string } }) {
-  const res = await axios.get(`http://localhost:3001/api/user/${id}`);
-  const user = res.data;
+  const user = await getUser(id);
 
   return (
     <>
@@ -30,7 +29,7 @@ async function SingleUser({ params: { id } }: { params: { id: string } }) {
               <h1 className="itemTitle">{user.nombre}</h1>
               <div className="detailItem">
                 <span className="itemKey">Usuario:</span>
-                <span className="itemValue">{user.nombre}</span>
+                <span className="itemValue">{user.username}</span>
               </div>
               <div className="detailItem">
                 <span className="itemKey">Email:</span>
@@ -46,9 +45,7 @@ async function SingleUser({ params: { id } }: { params: { id: string } }) {
               </div>
               <div className="detailItem">
                 <span className="itemKey">Fecha creacion:</span>
-                <span className="itemValue">
-                  {new Date(user.createdAt).toDateString()}
-                </span>
+                <span className="itemValue">{user.createdAt}</span>
               </div>
             </div>
           </div>

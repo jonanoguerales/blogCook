@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Posts } from "@/lib/interfaces";
 import { CardPost } from "./CardPost";
-import { getPosts } from "@/lib/api"; // Importar la función getPosts desde el archivo api.ts
+import { getPosts } from "@/lib/api";
 
 export function GetPosts() {
   const [posts, setPosts] = useState<Posts[]>([]);
@@ -10,7 +10,7 @@ export function GetPosts() {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const data = await getPosts(); // Utilizar la función getPosts para obtener los posts
+        const data = await getPosts();
         setPosts(data);
       } catch (error) {
         console.error(error);
@@ -39,4 +39,3 @@ export function GetPosts() {
     </>
   );
 }
-

@@ -9,9 +9,8 @@ import { Post, SinglePostProps } from "@/lib/interfaces";
 import { useAuth } from "@/context/authContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Comments from "../comments/Comments";
-import { DialogDefault } from "../ModalAdvert";
+import { DialogDefault } from "../modales/ModalAdvert.jsx";
 
 const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
   const [post, setPost] = useState<Post | null>(null);
@@ -49,7 +48,6 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
   }, [file]);
 
   const handleDelete = async () => {
-
     if (post) {
       try {
         await axios.delete(`http://localhost:3001/api/posts/${id}`, {
@@ -142,11 +140,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
                   className="singlePostIcon"
                   onClick={() => setUpdateMode(true)}
                 />
-                <FontAwesomeIcon
-                  icon={faTrash}
-                  className="singlePostIcon"
-                />
-                <DialogDefault />
+                <DialogDefault id={id} />
               </div>
             )}
           </div>
@@ -179,7 +173,6 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
       </div>
       <Comments post={post as Post} />
     </div>
-
   );
 };
 

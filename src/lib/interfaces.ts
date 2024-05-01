@@ -61,6 +61,7 @@ export interface CardPostProps {
 }
 
 export interface CardUsuariosPopularProps {
+  id: string;
   img: string;
   comentarios: number;
   posts: number;
@@ -102,7 +103,7 @@ export interface SinglePostProps {
 }
 
 export type UserRole = {
-  id: string,
-  role: string,
-  username: string,
+  id: string;
+  role: string;
+  username: string;
 };

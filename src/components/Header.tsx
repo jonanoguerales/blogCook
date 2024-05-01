@@ -93,101 +93,103 @@ export function Header() {
             </nav>
           </div>
 
-          <div className="block md:hidden">
-            <button
-              className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
-              onClick={toggleMenu}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d={
-                    isMenuOpen
-                      ? "M6 18L18 6M6 6l12 12"
-                      : "M4 6h16M4 12h16M4 18h16"
-                  }
-                />
-              </svg>
-            </button>
-          </div>
-
           <div className="flex items-center gap-4">
-            {isLoggedIn ? (
-              <div className="relative">
-                <button
-                  type="button"
-                  className="flex text-sm rounded-full md:me-0"
-                  onClick={toggleProfileMenu}
+            <div className="block md:hidden">
+              <button
+                className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+                onClick={toggleMenu}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  <Image
-                    className="size-12 rounded-full "
-                    src={imagen || "/usu.webp"}
-                    alt="user photo"
-                    width={1280}
-                    height={800}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d={
+                      isMenuOpen
+                        ? "M6 18L18 6M6 6l12 12"
+                        : "M4 6h16M4 12h16M4 18h16"
+                    }
                   />
-                </button>
-                {isProfileMenuOpen && (
-                  <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20">
-                    {" "}
-                    {/* Establece un z-index alto para el menú del perfil */}
-                    <div
-                      className="py-1"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="options-menu"
-                    >
-                      {user?.role === "admin" && (
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex items-center gap-4">
+              {isLoggedIn ? (
+                <div className="relative">
+                  <button
+                    type="button"
+                    className="flex text-sm rounded-full md:me-0"
+                    onClick={toggleProfileMenu}
+                  >
+                    <Image
+                      className="size-12 rounded-full "
+                      src={imagen || "/usu.webp"}
+                      alt="user photo"
+                      width={1280}
+                      height={800}
+                    />
+                  </button>
+                  {isProfileMenuOpen && (
+                    <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-20">
+                      {" "}
+                      {/* Establece un z-index alto para el menú del perfil */}
+                      <div
+                        className="py-1"
+                        role="menu"
+                        aria-orientation="vertical"
+                        aria-labelledby="options-menu"
+                      >
+                        {user?.role === "admin" && (
+                          <Link
+                            href="/dashboard"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            onClick={closeProfileMenu}
+                          >
+                            Dashboard
+                          </Link>
+                        )}
                         <Link
-                          href="/dashboard"
+                          href="/ajustes"
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           onClick={closeProfileMenu}
                         >
-                          Dashboard
+                          Ajustes
                         </Link>
-                      )}
-                      <Link
-                        href="/ajustes"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={closeProfileMenu}
-                      >
-                        Ajustes
-                      </Link>
-                      <Link
-                        href={`/perfil/${user?.id}`}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={closeProfileMenu}
-                      >
-                        Perfil
-                      </Link>
-                      <Logout />
+                        <Link
+                          href={`/perfil/${user?.id}`}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={closeProfileMenu}
+                        >
+                          Perfil
+                        </Link>
+                        <Logout />
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="flex gap-4">
-                <Link
-                  className="rounded-md bg-blue-800 px-5 py-2.5 text-sm font-medium text-white shadow"
-                  href="/login"
-                >
-                  Identificarse
-                </Link>
-                <Link
-                  className="rounded-md bg-sky-100 px-5 py-2.5 text-sm font-medium text-blue-800"
-                  href="/registro"
-                >
-                  Registrarse
-                </Link>
-              </div>
-            )}
+                  )}
+                </div>
+              ) : (
+                <div className="flex gap-4">
+                  <Link
+                    className="rounded-md bg-blue-800 px-5 py-2.5 text-sm font-medium text-white shadow"
+                    href="/login"
+                  >
+                    Identificarse
+                  </Link>
+                  <Link
+                    className="rounded-md bg-sky-100 px-5 py-2.5 text-sm font-medium text-blue-800"
+                    href="/registro"
+                  >
+                    Registrarse
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
         {isMenuOpen && (

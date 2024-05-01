@@ -75,8 +75,9 @@ export function SiderBar() {
         {users.map((user: User) => (
           <CardUsuariosPopular
             key={user._id}
+            id={user._id}
             img={user.profilePic}
-            usuario={user.nombre}
+            usuario={user.username}
             comentarios={user.numComentarios}
             posts={user.numPosts}
             likes={user.numLikes}

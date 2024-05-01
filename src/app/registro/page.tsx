@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
-import { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import "./registro.css";
 import axios from "axios";
-import { User } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 
 type Errors = {
@@ -20,8 +19,6 @@ export default function Registro() {
   const [repeatPassword, setRepeatPassword] = useState<string>("");
   const [nombre, setNombre] = useState<string>("");
   const [telefono, setTelefono] = useState<string>("");
-  const [terminos, cambiarTerminos] = useState(false);
-  const [users, setUsers] = useState([]);
   const router = useRouter();
   const [errors, setErrors] = useState<Errors>({
     username: "",
@@ -30,7 +27,6 @@ export default function Registro() {
     repeatPassword: "",
   });
 
-  console.log(username, email, password, repeatPassword);
   const validateEmail = (email: string): boolean => {
     const re =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -45,18 +41,6 @@ export default function Registro() {
     }
   };
 
-  const onChangeTerminos = (e: ChangeEvent<HTMLInputElement>) => {
-    cambiarTerminos(e.target.checked);
-  };
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const res = await axios.get("http://localhost:3001/api/users");
-      setUsers(res.data);
-    };
-    fetchUsers();
-  }, []);
-  const alluser = users.map((user: User) => user.username);
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     let newErrors = { ...errors };
@@ -117,11 +101,9 @@ export default function Registro() {
       );
 
       if (response.status === 200) {
-        // Registration successful
         console.log("Usuario registrado:", response.data);
         router.push("/login");
       } else {
-        // Handle specific API errors
         const errorData = response.data;
         if (errorData.message && errorData.message.includes("username")) {
           alert("El nombre de usuario ya existe. Por favor, elige otro.");
@@ -133,7 +115,6 @@ export default function Registro() {
         }
       }
     } catch (error) {
-      // Handle Axios request error
       console.error("Error en la solicitud:", error);
       alert(
         "Ha ocurrido un error al registrarse. Inténtalo de nuevo más tarde."
@@ -223,7 +204,6 @@ export default function Registro() {
                       id="nombre"
                       className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                       placeholder=" "
-                      required
                       onChange={(e) => setNombre(e.target.value)}
                     />
                     <label
@@ -297,7 +277,6 @@ export default function Registro() {
                     id="telefono"
                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
-                    required
                     onChange={(event) => setTelefono(event.target.value)}
                   />
                   <label

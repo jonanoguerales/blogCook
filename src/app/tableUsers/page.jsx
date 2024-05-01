@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./tableUsers.css";
 import SidebarDash from "../../components/dashSidebar/SidebarDash";
+import Image from "next/image";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -112,10 +113,12 @@ function Users() {
                 <tr key={elemento._id}>
                   <td>{elemento._id.slice(0, 5)}</td>
                   <td>
-                    <img
+                    <Image
                       className="imgPost"
                       src={PF + elemento.profilePic}
-                      alt=""
+                      alt="imagen"
+                      width="50"
+                      height="50"
                     />
                   </td>
                   <td>{elemento.username}</td>
