@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const verifyUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/auth/profile",
+          "https://apiblog-01g5.onrender.com/api/auth/profile",
           {
             withCredentials: true,
           }
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   ): Promise<Boolean> => {
     try {
       await axios.post(
-        "http://localhost:3001/api/auth/login",
+        "https://apiblog-01g5.onrender.com/api/auth/login",
         { username, password },
         { withCredentials: true }
       );
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   async function logout() {
-    await axios.post("http://localhost:3001/api/auth/logout", {
+    await axios.post("https://apiblog-01g5.onrender.com/api/auth/logout", {
       withCredentials: true,
     });
     setUser(null);

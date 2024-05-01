@@ -26,7 +26,9 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
     const getPost = async () => {
       if (typeof id === "string") {
         try {
-          const res = await axios.get(`http://localhost:3001/api/post/${id}`);
+          const res = await axios.get(
+            `https://apiblog-01g5.onrender.com/api/post/${id}`
+          );
           setPost(res.data);
           setTitle(res.data.title);
           setDesc(res.data.desc);
@@ -50,9 +52,12 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
   const handleDelete = async () => {
     if (post) {
       try {
-        await axios.delete(`http://localhost:3001/api/posts/${id}`, {
-          data: { username: user?.username },
-        });
+        await axios.delete(
+          `https://apiblog-01g5.onrender.com/api/posts/${id}`,
+          {
+            data: { username: user?.username },
+          }
+        );
         router.push("/");
       } catch (error) {
         console.error(error);
@@ -84,7 +89,10 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
     }
 
     try {
-      await axios.put(`http://localhost:3001/api/posts/${id}`, updatePost);
+      await axios.put(
+        `https://apiblog-01g5.onrender.com/api/posts/${id}`,
+        updatePost
+      );
       setUpdateMode(false);
     } catch (error) {
       console.error(error);

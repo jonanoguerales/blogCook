@@ -7,11 +7,13 @@ import Image from "next/image";
 
 function Users() {
   const [users, setUsers] = useState([]);
-  const PF = "http://localhost:3001/images/";
+  const PF = "https://apiblog-01g5.onrender.com/images/";
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await axios.get("http://localhost:3001/api/users");
+      const res = await axios.get(
+        "https://apiblog-01g5.onrender.com/api/users"
+      );
       setUsers(res.data);
     };
     fetchUsers();
@@ -47,7 +49,7 @@ function Users() {
       setUsers(dataNueva);
 
       await axios.put(
-        `http://localhost:3001/api/user/${userSeleccionado._id}`,
+        `https://apiblog-01g5.onrender.com/api/user/${userSeleccionado._id}`,
         {
           username: userSeleccionado.username,
           nombre: userSeleccionado.nombre,
@@ -65,7 +67,7 @@ function Users() {
     try {
       setUsers(users.filter((user) => user._id !== userSeleccionado._id));
       await axios.delete(
-        `http://localhost:3001/api/users/${userSeleccionado._id}`,
+        `https://apiblog-01g5.onrender.com/api/users/${userSeleccionado._id}`,
         {
           data: { username: userSeleccionado._id },
         }

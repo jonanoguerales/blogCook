@@ -4,7 +4,7 @@ import { User } from "@/lib/interfaces";
 
 export async function getPosts() {
   try {
-    const res = await axios.get("http://localhost:3001/api/posts");
+    const res = await axios.get("https://apiblog-01g5.onrender.com/api/posts");
     if (res.status !== 200) {
       throw new Error(
         `Error al obtener los posts: ${res.status} ${res.statusText}`
@@ -26,7 +26,9 @@ export async function getPosts() {
 
 export async function getPostsCategorias(category: string) {
   try {
-    const res = await axios.get(`http://localhost:3001/api/posts/${category}`);
+    const res = await axios.get(
+      `https://apiblog-01g5.onrender.com/api/posts/${category}`
+    );
     if (res.status !== 200) {
       throw new Error(
         `Error al obtener los posts de categoria: ${res.status} ${res.statusText}`
@@ -48,7 +50,9 @@ export async function getPostsCategorias(category: string) {
 
 export async function getUser(id: string) {
   try {
-    const res = await axios.get(`http://localhost:3001/api/user/${id}`);
+    const res = await axios.get(
+      `https://apiblog-01g5.onrender.com/api/user/${id}`
+    );
     if (res.status !== 200) {
       throw new Error(
         `Error al obtener el usuario: ${res.status} ${res.statusText}`
@@ -70,7 +74,9 @@ export async function getUser(id: string) {
 
 export async function getComentarios(id: string) {
   try {
-    const res = await axios.get("http://localhost:3001/api/comments");
+    const res = await axios.get(
+      "https://apiblog-01g5.onrender.com/api/comments"
+    );
     if (res.status !== 200) {
       throw new Error(
         `Error al obtener comentarios: ${res.status} ${res.statusText}`
