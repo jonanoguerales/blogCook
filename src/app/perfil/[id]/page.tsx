@@ -1,11 +1,21 @@
+"use client";
 import Link from "next/link";
 import UserPosts from "@/components/ObtenerPostsUser";
 import "./perfil.css";
 import Image from "next/image";
 import { getUser } from "@/lib/api";
+import { useEffect, useState } from "react";
+import { User } from "@/lib/interfaces";
 
-async function SingleUser({ params: { id } }: { params: { id: string } }) {
-  const user = await getUser(id);
+function SingleUser({ params: { id } }: { params: { id: string } }) {
+  const [user, setUser] = useState<User>({} as User);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getUser(id);
+      setUser(user);
+    };
+    fetchUser();
+  }, [id]);
 
   return (
     <>

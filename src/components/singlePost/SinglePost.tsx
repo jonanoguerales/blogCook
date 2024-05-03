@@ -19,7 +19,6 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
   const [updateMode, setUpdateMode] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState("");
-  const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -48,22 +47,6 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
       return () => URL.revokeObjectURL(newPreviewUrl);
     }
   }, [file]);
-
-  const handleDelete = async () => {
-    if (post) {
-      try {
-        await axios.delete(
-          `https://apiblog-01g5.onrender.com/api/posts/${id}`,
-          {
-            data: { username: user?.username },
-          }
-        );
-        router.push("/");
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
 
   const handleUpdate = async () => {
     const updatePost = {

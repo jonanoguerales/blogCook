@@ -18,7 +18,7 @@ const Settings = () => {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
   const [success, setSuccess] = useState(false);
-  const { user } = useAuth();
+  const { user, setCambioToken } = useAuth();
   const [userId, setUserId] = useState<User | null>();
   const [previewUrl, setPreviewUrl] = useState("");
   const router = useRouter();
@@ -60,6 +60,9 @@ const Settings = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const AUTH_TOKENS_KEY = "NEXT_JS_AUTH";
+
     const updatedUser = {
       userId: user?.id,
       username: username ? username : userId?.username,
@@ -85,10 +88,15 @@ const Settings = () => {
       }
     }
     try {
-      await axios.put(
+      const response = await axios.put(
         `https://apiblog-01g5.onrender.com/api/user/${user?.id}`,
         updatedUser
       );
+      window.localStorage.setItem(
+        AUTH_TOKENS_KEY,
+        JSON.stringify(response.data)
+      );
+      setCambioToken(true);
       setSuccess(true);
       router.replace("/");
     } catch (err) {

@@ -119,7 +119,7 @@ export default function Redactar() {
     <div className="write mx-auto max-w-screen-3xl">
       {file ? (
         <Image
-          className="writeImg w-[40%] h-[253px]"
+          className="writeImg w-[60%] h-[253px]"
           src={previewUrl}
           alt="Imagen previa de la receta"
           width={1280}

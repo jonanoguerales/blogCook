@@ -27,7 +27,14 @@ const Commentario = ({ post, click }: CommentarioProps) => {
       const res = await axios.get<Comment[]>(
         "https://apiblog-01g5.onrender.com/api/comments"
       );
-      setComments(res.data);
+      const data = res.data;
+
+      // Formatear la fecha de creación en formato 'es-ES'
+      data.forEach((coment: Comment) => {
+        coment.createdAt = new Date(post.createdAt).toLocaleDateString("es-ES");
+      });
+
+      setComments(data);
     };
 
     if (postId) {
@@ -45,9 +52,7 @@ const Commentario = ({ post, click }: CommentarioProps) => {
         <div key={postComm._id} className="comment">
           <div className="topComment">
             <span className="nick">{postComm.name}</span>
-            <span className="date">
-              {new Date(postComm.createdAt).toDateString()}
-            </span>
+            <span className="date">{postComm.createdAt}</span>
           </div>
           <div className="commentario">{postComm.comment}</div>
         </div>

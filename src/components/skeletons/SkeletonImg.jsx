@@ -2,8 +2,8 @@ import { Typography } from "@material-tailwind/react";
 
 export function ImagePlacehoderSkeleton() {
   return (
-    <div className="flex animate-pulse flex-wrap items-center gap-8">
-      <div className="grid h-60 w-[450px] place-items-center rounded-lg bg-gray-300">
+    <div className="flex justify-center w-full animate-pulse flex-wrap items-center gap-8">
+      <div className="grid h-60 w-3/5 place-items-center rounded-lg bg-gray-300">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

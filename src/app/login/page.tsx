@@ -11,9 +11,9 @@ import { useAuth } from "@/context/authContext";
 export default function Login() {
   const [success, setSuccess] = useState<boolean>(false);
   const router = useRouter();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const { login, user } = useAuth();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useAuth();
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -25,18 +25,25 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    axios.defaults.withCredentials = true;
     try {
-      const respuesta = await login(username, password);
-      if (respuesta) {
+      const response = await axios.post(
+        "https://apiblog-01g5.onrender.com/api/auth/login",
+        {
+          username,
+          password,
+        }
+      );
+      if (response) {
+        const tokens = response.data;
+        login(tokens);
         setSuccess(false);
         router.push("/");
       } else {
         setSuccess(true);
       }
-
     } catch (err) {
       console.log(err);
+      setSuccess(true);
     }
   };
   return (
@@ -44,8 +51,16 @@ export default function Login() {
       <h1>Inicio de Sesión</h1>
       <div className="loginForm">
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Nombre de usuario" onChange={handleUsernameChange} />
-          <input type="password" placeholder="Contraseña" onChange={handlePasswordChange} />
+          <input
+            type="text"
+            placeholder="Nombre de usuario"
+            onChange={handleUsernameChange}
+          />
+          <input
+            type="password"
+            placeholder="Contraseña"
+            onChange={handlePasswordChange}
+          />
           <button className="loginBtn" type="submit">
             Iniciar Sesión
           </button>

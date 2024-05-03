@@ -127,7 +127,7 @@ export default function Registro() {
         <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <Image
             alt="Imagen fondo"
-            src="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714144423/1_aniir3_-_Square_Post_oeeoa0.png"
+            src="https://res.cloudinary.com/dpauhj4zu/image/upload/v1714743978/fondo-registro.webp"
             className="absolute inset-0 h-full w-full object-cover opacity-80"
             width={1280}
             height={720}
