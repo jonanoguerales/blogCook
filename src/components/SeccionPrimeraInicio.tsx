@@ -51,7 +51,9 @@ export function SeccionPrimeraInicio() {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const res = await axios.get("http://localhost:3001/api/posts");
+      const res = await axios.get(
+        "https://apiblog-01g5.onrender.com/api/posts"
+      );
       setPosts(res.data);
     };
     fetchPost();

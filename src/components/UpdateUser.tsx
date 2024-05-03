@@ -5,7 +5,9 @@ export async function UpdateUser(
   props: UserRole,
   type: "post" | "comment" | "like"
 ) {
-  const res = await axios.get(`http://localhost:3001/api/user/${props.id}`);
+  const res = await axios.get(
+    `https://apiblog-01g5.onrender.com/api/user/${props.id}`
+  );
   const data = await res.data;
   const users = data;
   let updateUser;
@@ -34,5 +36,8 @@ export async function UpdateUser(
     default:
       throw new Error("Invalid type");
   }
-  await axios.put(`http://localhost:3001/api/user/${props.id}`, updateUser);
+  await axios.put(
+    `https://apiblog-01g5.onrender.com/api/user/${props.id}`,
+    updateUser
+  );
 }

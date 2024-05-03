@@ -7,11 +7,13 @@ import SidebarDash from "@/components/dashSidebar/SidebarDash";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
-  const PF = "http://localhost:3001/images/";
+  const PF = "https://apiblog-01g5.onrender.com/images/";
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get("http://localhost:3001/api/posts");
+      const res = await axios.get(
+        "https://apiblog-01g5.onrender.com/api/posts"
+      );
       setPosts(res.data);
     };
     fetchPosts();
@@ -45,7 +47,7 @@ function Posts() {
       setPosts(dataNueva);
 
       await axios.put(
-        `http://localhost:3001/api/post/${postSeleccionado._id}`,
+        `https://apiblog-01g5.onrender.com/api/post/${postSeleccionado._id}`,
         {
           username: postSeleccionado.username,
           title: postSeleccionado.title,
@@ -62,7 +64,7 @@ function Posts() {
     try {
       setPosts(posts.filter((post) => post._id !== postSeleccionado._id));
       await axios.delete(
-        `http://localhost:3001/api/post/${postSeleccionado._id}`,
+        `https://apiblog-01g5.onrender.com/api/post/${postSeleccionado._id}`,
         {
           data: { username: postSeleccionado._id },
         }

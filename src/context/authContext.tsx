@@ -57,7 +57,7 @@ export default function AuthContextProvider({
       };
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/auth/profile",
+          "https://apiblog-01g5.onrender.com/api/auth/profile",
           {
             withCredentials: true,
             headers: {
