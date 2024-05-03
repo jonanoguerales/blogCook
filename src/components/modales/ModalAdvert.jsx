@@ -20,7 +20,7 @@ export function DialogDefault({ id }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://apiblog-01g5.onrender.com/api/post/${id}`);
+      await axios.delete(`http://localhost:3001/api/post/${id}`);
       router.push("/");
     } catch (error) {
       console.error(error);

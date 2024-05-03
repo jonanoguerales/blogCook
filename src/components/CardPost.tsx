@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function CardPost(props: CardPostProps) {
   return (
-    <article className="max-w-[1000px] overflow-hidden rounded-lg shadow transition hover:shadow-lg flex max-xss:flex-col xss:h-[250px]">
+    <article className="max-w-[1000px] overflow-hidden rounded-lg shadow transition hover:shadow-lg flex flex-col xss:flex-row xss:h-[250px]">
       <div className="xss:w-1/2">
         <Image
           alt="imagen receta"

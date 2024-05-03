@@ -96,7 +96,7 @@ export default function Registro() {
 
     try {
       const response = await axios.post(
-        "https://apiblog-01g5.onrender.com/api/auth/register",
+        "http://localhost:3001/api/auth/register",
         formData
       );
 

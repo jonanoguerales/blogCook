@@ -7,13 +7,10 @@ import Image from "next/image";
 
 function Users() {
   const [users, setUsers] = useState([]);
-  const PF = "https://apiblog-01g5.onrender.com/images/";
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await axios.get(
-        "https://apiblog-01g5.onrender.com/api/users"
-      );
+      const res = await axios.get("http://localhost:3001/api/users");
       setUsers(res.data);
     };
     fetchUsers();
@@ -49,7 +46,7 @@ function Users() {
       setUsers(dataNueva);
 
       await axios.put(
-        `https://apiblog-01g5.onrender.com/api/user/${userSeleccionado._id}`,
+        `http://localhost:3001/api/user/${userSeleccionado._id}`,
         {
           username: userSeleccionado.username,
           nombre: userSeleccionado.nombre,
@@ -67,7 +64,7 @@ function Users() {
     try {
       setUsers(users.filter((user) => user._id !== userSeleccionado._id));
       await axios.delete(
-        `https://apiblog-01g5.onrender.com/api/users/${userSeleccionado._id}`,
+        `http://localhost:3001/api/users/${userSeleccionado._id}`,
         {
           data: { username: userSeleccionado._id },
         }
@@ -92,52 +89,55 @@ function Users() {
   return (
     <>
       <div className="tablas">
+        <SidebarDash />
         <div className="tablasContainer">
           <br />
           <h2 className="registerUsersTitle">Usuarios Registrados</h2>
           <br />
-          <table className="myTable">
+          <table className="myTable mr-5">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Imagen Perfil</th>
-                <th>Usuario</th>
-                <th>Nombre</th>
-                <th>email</th>
-                <th>Teléfono</th>
-                <th>Role</th>
-                <th>Creacion</th>
+                <th className="py-2">ID</th>
+                <th className="py-2">Imagen Perfil</th>
+                <th className="py-2">Usuario</th>
+                <th className="py-2">Nombre</th>
+                <th className="py-2">email</th>
+                <th className="py-2">Teléfono</th>
+                <th className="py-2">Role</th>
+                <th className="py-2">Creacion</th>
               </tr>
             </thead>
 
             <tbody className="tbdoyEdit">
               {users.map((elemento) => (
                 <tr key={elemento._id}>
-                  <td>{elemento._id.slice(0, 5)}</td>
-                  <td>
+                  <td className="pl-2">{elemento._id.slice(0, 5)}</td>
+                  <td className="py-2 flex justify-center h-[100px] items-center">
                     <Image
                       className="imgPost"
-                      src={PF + elemento.profilePic}
+                      src={elemento.profilePic}
                       alt="imagen"
                       width="50"
                       height="50"
                     />
                   </td>
-                  <td>{elemento.username}</td>
-                  <td>{elemento.nombre}</td>
-                  <td>{elemento.email}</td>
-                  <td>{elemento.telefono}</td>
-                  <td>{elemento.role}</td>
-                  <td>{new Date(elemento.createdAt).toDateString()}</td>
+                  <td className="text-left px-2">{elemento.username}</td>
+                  <td className="text-left px-2">{elemento.nombre}</td>
+                  <td className="text-left px-2">{elemento.email}</td>
+                  <td className="text-left px-2">{elemento.telefono}</td>
+                  <td className="text-left px-2">{elemento.role}</td>
+                  <td className="text-left px-2">
+                    {new Date(elemento.createdAt).toDateString()}
+                  </td>
                   <td>
                     <button
-                      color="primary"
+                      className="bg-blue-700 p-2 rounded-lg my-2"
                       onClick={() => seleccionarUser(elemento, "Editar")}
                     >
                       Editar
                     </button>{" "}
                     <button
-                      color="danger"
+                      className="bg-red-700 p-2 rounded-lg m-2"
                       onClick={() => seleccionarUser(elemento, "Eliminar")}
                     >
                       Eliminar

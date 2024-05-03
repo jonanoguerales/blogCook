@@ -46,12 +46,9 @@ const Settings = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `https://apiblog-01g5.onrender.com/api/user/${user?.id}`,
-        {
-          data: { username: user?.username },
-        }
-      );
+      await axios.delete(`http://localhost:3001/api/user/${user?.id}`, {
+        data: { username: user?.username },
+      });
       router.replace("/");
     } catch (err) {
       console.error(err);
@@ -89,7 +86,7 @@ const Settings = () => {
     }
     try {
       const response = await axios.put(
-        `https://apiblog-01g5.onrender.com/api/user/${user?.id}`,
+        `http://localhost:3001/api/user/${user?.id}`,
         updatedUser
       );
       window.localStorage.setItem(

@@ -182,7 +182,7 @@ export function Header() {
                     Identificarse
                   </Link>
                   <Link
-                    className="rounded-md bg-sky-100 px-5 py-2.5 text-sm font-medium text-blue-800"
+                    className="rounded-md bg-sky-100 px-5 py-2.5 text-sm font-medium text-blue-800 hidden md:block"
                     href="/registro"
                   >
                     Registrarse

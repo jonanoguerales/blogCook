@@ -13,9 +13,7 @@ export function SiderBar() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get(
-          "https://apiblog-01g5.onrender.com/api/users"
-        );
+        const res = await axios.get("http://localhost:3001/api/users");
         const data = res.data;
         const usersWithPosts = data.filter((user: User) => user.numPosts >= 0);
         const topUsers = usersWithPosts

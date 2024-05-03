@@ -1,13 +1,12 @@
-.tablas{
+.tablas {
   min-height: 100vh;
   display: flex;
-  background: #1E1E3D;
+  background: #1e1e3d;
 }
 
-.tablasContainer{
+.tablasContainer {
   flex: 6;
 }
-
 
 .Users {
   text-align: center;
@@ -22,11 +21,11 @@
   pointer-events: none;
 }
 
-.registerPostsTitle{
+.registerPostsTitle {
   cursor: default;
-  font-family: 'Erica One', cursive;
+  font-family: "Erica One", cursive;
   font-size: 40px;
-  color: #1f1e3d;
+  color: #ffffff;
   line-height: 50px;
 }
 
@@ -76,26 +75,28 @@ button.btn.btn-danger {
   background: tomato;
 }
 
-.tbdoyEdit  tr{
+.tbdoyEdit tr {
   vertical-align: middle;
 }
 
-.tbdoyEdit, th, td{
+.tbdoyEdit,
+th,
+td {
   text-align: center;
 }
 
 .myTable {
-  background: #f2f2f2!important;
+  background: #f2f2f2 !important;
   border-radius: 10px;
   box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 }
 
 table.myTable.table {
-  background: #f2f2f2!important;
+  background: #f2f2f2 !important;
   border-radius: 10px;
   box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 }
 
-.table>:not(caption)>*>*{
-  padding-top: 20px!important;
+.table > :not(caption) > * > * {
+  padding-top: 20px !important;
 }

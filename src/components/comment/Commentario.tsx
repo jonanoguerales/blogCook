@@ -25,7 +25,7 @@ const Commentario = ({ post, click }: CommentarioProps) => {
   useEffect(() => {
     const fetchComments = async () => {
       const res = await axios.get<Comment[]>(
-        "https://apiblog-01g5.onrender.com/api/comments"
+        "http://localhost:3001/api/comments"
       );
       const data = res.data;
 

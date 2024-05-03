@@ -3,16 +3,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./tablePosts.css";
 import Image from "next/image";
+import SidebarDash from "@/components/dashSidebar/SidebarDash";
 
 function Posts() {
   const [posts, setPosts] = useState([]);
-  const PF = "https://apiblog-01g5.onrender.com/images/";
+  const PF = "http://localhost:3001/images/";
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get(
-        "https://apiblog-01g5.onrender.com/api/posts"
-      );
+      const res = await axios.get("http://localhost:3001/api/posts");
       setPosts(res.data);
     };
     fetchPosts();
@@ -46,7 +45,7 @@ function Posts() {
       setPosts(dataNueva);
 
       await axios.put(
-        `https://apiblog-01g5.onrender.com/api/post/${postSeleccionado._id}`,
+        `http://localhost:3001/api/post/${postSeleccionado._id}`,
         {
           username: postSeleccionado.username,
           title: postSeleccionado.title,
@@ -63,7 +62,7 @@ function Posts() {
     try {
       setPosts(posts.filter((post) => post._id !== postSeleccionado._id));
       await axios.delete(
-        `https://apiblog-01g5.onrender.com/api/post/${postSeleccionado._id}`,
+        `http://localhost:3001/api/post/${postSeleccionado._id}`,
         {
           data: { username: postSeleccionado._id },
         }
@@ -88,28 +87,29 @@ function Posts() {
   return (
     <>
       <div className="tablas">
+        <SidebarDash />
         <div className="tablasContainer">
           <br />
           <h2 className="registerPostsTitle">Posts Registrados</h2>
           <br />
-          <table className="myTable">
+          <table className="myTable mr-5">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Imagen Post</th>
-                <th>Titulo</th>
-                <th>Usuario</th>
-                <th>Categoria</th>
-                <th>Descripcion</th>
-                <th>Creacion</th>
+                <th className="py-2">ID</th>
+                <th className="py-2">Imagen Post</th>
+                <th className="py-2">Titulo</th>
+                <th className="py-2">Usuario</th>
+                <th className="py-2">Categoria</th>
+                <th className="py-2">Descripcion</th>
+                <th className="py-2">Creacion</th>
               </tr>
             </thead>
 
             <tbody className="tbdoyEdit">
               {posts.map((elemento) => (
                 <tr key={elemento._id}>
-                  <td>{elemento._id.slice(0, 5)}</td>
-                  <td>
+                  <td className="pl-2">{elemento._id.slice(0, 5)}</td>
+                  <td className="py-2 flex justify-center h-[100px] items-center">
                     <Image
                       className="imgPost"
                       src={elemento.photo}
@@ -118,20 +118,24 @@ function Posts() {
                       height={100}
                     />
                   </td>
-                  <td>{elemento.title}</td>
-                  <td>{elemento.username}</td>
-                  <td>{elemento.categories}</td>
-                  <td>{elemento.desc.slice(0, 20)}</td>
-                  <td>{new Date(elemento.createdAt).toDateString()}</td>
+                  <td className="text-left px-2">{elemento.title}</td>
+                  <td className="text-left px-2">{elemento.username}</td>
+                  <td className="text-left px-2">{elemento.categories}</td>
+                  <td className="text-left px-2">
+                    {elemento.desc.slice(0, 20)}
+                  </td>
+                  <td className="px-2">
+                    {new Date(elemento.createdAt).toDateString()}
+                  </td>
                   <td>
                     <button
-                      color="primary"
+                      className="bg-blue-700 p-2 rounded-lg my-2"
                       onClick={() => seleccionarPost(elemento, "Editar")}
                     >
                       Editar
                     </button>{" "}
                     <button
-                      color="danger"
+                      className="bg-red-700 p-2 rounded-lg m-2"
                       onClick={() => seleccionarPost(elemento, "Eliminar")}
                     >
                       Eliminar

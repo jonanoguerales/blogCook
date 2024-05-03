@@ -19,10 +19,7 @@ const Comments = ({ post }: { post: Post }) => {
       comment,
     };
     try {
-      await axios.post(
-        "https://apiblog-01g5.onrender.com/api/comments",
-        newComment
-      );
+      await axios.post("http://localhost:3001/api/comments", newComment);
     } catch (err) {
       alert("comentario vacio");
     }

@@ -25,9 +25,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
     const getPost = async () => {
       if (typeof id === "string") {
         try {
-          const res = await axios.get(
-            `https://apiblog-01g5.onrender.com/api/post/${id}`
-          );
+          const res = await axios.get(`http://localhost:3001/api/post/${id}`);
           setPost(res.data);
           setTitle(res.data.title);
           setDesc(res.data.desc);
@@ -72,10 +70,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
     }
 
     try {
-      await axios.put(
-        `https://apiblog-01g5.onrender.com/api/posts/${id}`,
-        updatePost
-      );
+      await axios.put(`http://localhost:3001/api/posts/${id}`, updatePost);
       setUpdateMode(false);
     } catch (error) {
       console.error(error);
@@ -138,7 +133,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
         )}
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author:
+            Autor:
             <Link href={`/perfil/${post?.username}`} className="link">
               <b> {post?.username}</b>
             </Link>
