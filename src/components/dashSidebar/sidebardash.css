@@ -1,11 +1,11 @@
 .sidebarDash {
-  flex: 1;
   border-radius: 30px;
   max-height: 95vh;
   padding: 10px;
   margin: 30px;
   background-color: #272c4a;
   color: #fff;
+  width: 250px;
 }
 
 .sidebarDash .topDash {

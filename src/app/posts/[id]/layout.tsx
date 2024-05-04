@@ -1,19 +1,9 @@
-"use client";
-
-import { redirect } from "next/navigation";
-import { useAuth } from "@/context/authContext";
 import { ReactNode } from "react";
 import { Header } from "@/components/Header";
 import Footer from "@/components/footer/Footer";
 import ScrollTop from "@/components/botonScroll/ScrollBoton";
 
-function LayoutPerfil({ children }: { children: ReactNode }) {
-  const { isLoggedIn } = useAuth();
-
-  if (isLoggedIn === false) {
-    redirect("/login");
-  }
-
+function LayoutPosts({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
@@ -24,4 +14,4 @@ function LayoutPerfil({ children }: { children: ReactNode }) {
   );
 }
 
-export default LayoutPerfil;
+export default LayoutPosts;

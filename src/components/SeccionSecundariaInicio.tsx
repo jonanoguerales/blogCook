@@ -3,7 +3,7 @@ import { CardCategoria } from "./CardCategoria";
 
 export async function SeccionSecundariaInicio() {
   return (
-    <section className="mx-auto max-w-screen-3xl px-4 py-16 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-screen-3xl bg-white px-4 py-16 sm:px-6 lg:px-8">
       <h2 className="text-4xl font-bold text-center pb-8">
         CATEGORIAS POPULARES
       </h2>

@@ -1,17 +1,21 @@
 "use client";
-
 import { redirect } from "next/navigation";
 import { useAuth } from "@/context/authContext";
 import { ReactNode } from "react";
+import { ThemeProvider } from "@material-tailwind/react";
 
 function LayoutTableUsers({ children }: { children: ReactNode }) {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
 
-  if (isLoggedIn === false) {
+  if (isLoggedIn === false || user?.role !== "admin") {
     redirect("/login");
   }
 
-  return <div>{children}</div>;
+  return (
+    <ThemeProvider>
+      <div>{children}</div>
+    </ThemeProvider>
+  );
 }
 
 export default LayoutTableUsers;

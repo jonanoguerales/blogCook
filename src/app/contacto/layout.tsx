@@ -3,6 +3,9 @@
 import { redirect } from "next/navigation";
 import { useAuth } from "@/context/authContext";
 import { ReactNode } from "react";
+import { Header } from "@/components/Header";
+import Footer from "@/components/footer/Footer";
+import ScrollTop from "@/components/botonScroll/ScrollBoton";
 
 function LayoutContacto({ children }: { children: ReactNode }) {
   const { isLoggedIn } = useAuth();
@@ -11,7 +14,14 @@ function LayoutContacto({ children }: { children: ReactNode }) {
     redirect("/login");
   }
 
-  return <div>{children}</div>;
+  return (
+    <>
+      <Header />
+      <main className="bg-white mx-auto max-w-screen-3xl"> {children}</main>
+      <Footer />
+      <ScrollTop />
+    </>
+  );
 }
 
 export default LayoutContacto;

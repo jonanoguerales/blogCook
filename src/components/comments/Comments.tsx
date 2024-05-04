@@ -16,6 +16,7 @@ const Comments = ({ post }: { post: Post }) => {
     const newComment = {
       name: user && user.username,
       id_post: post._id,
+      id_user: user && user.id,
       comment,
     };
     try {
@@ -23,6 +24,7 @@ const Comments = ({ post }: { post: Post }) => {
         "https://apiblog-01g5.onrender.com/api/comments",
         newComment
       );
+      setClick(!click);
     } catch (err) {
       alert("comentario vacio");
     }
@@ -49,11 +51,7 @@ const Comments = ({ post }: { post: Post }) => {
             autoFocus
             onChange={(e) => setComment(e.target.value)}
           />
-          <button
-            className="commentBTN"
-            type="submit"
-            onClick={() => setClick(!click)}
-          >
+          <button className="commentBTN" type="submit">
             Dejar comentario
           </button>
         </form>

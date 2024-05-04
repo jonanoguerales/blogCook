@@ -22,6 +22,7 @@ const Settings = () => {
   const [userId, setUserId] = useState<User | null>();
   const [previewUrl, setPreviewUrl] = useState("");
   const router = useRouter();
+  const AUTH_TOKENS_KEY = "NEXT_JS_AUTH";
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -47,21 +48,18 @@ const Settings = () => {
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `https://apiblog-01g5.onrender.com/api/user/${user?.id}`,
-        {
-          data: { username: user?.username },
-        }
+        `https://apiblog-01g5.onrender.com/api/user/${user?.id}`
       );
+      // Borrar el token del local storage
+      window.localStorage.removeItem(AUTH_TOKENS_KEY);
       router.replace("/");
     } catch (err) {
-      console.error(err);
+      console.error("error al eliminarlo", err);
     }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const AUTH_TOKENS_KEY = "NEXT_JS_AUTH";
 
     const updatedUser = {
       userId: user?.id,

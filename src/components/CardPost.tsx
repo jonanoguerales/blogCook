@@ -27,11 +27,11 @@ export function CardPost(props: CardPostProps) {
             <h3 className="mt-0.5 text-lg text-gray-900">{props.titulo}</h3>
           </a>
 
-          <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500 h-[inherit]">
+          <p className="my-2 line-clamp-3 text-sm/relaxed text-gray-500 h-[inherit]">
             {props.parrafo}
           </p>
           <Link href={`/posts/${props.id}`}>
-            <button className="mt-4 rounded-md hover:bg-slate-400 border border-blue-800 bg-blue-800 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-blue-800 focus:ring shadow-lg">
+            <button className="rounded-md hover:bg-slate-400 border border-blue-800 bg-blue-800 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-blue-800 focus:ring shadow-lg">
               ver receta
             </button>
           </Link>

@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import { useState, ChangeEvent, FormEvent } from "react";
-import "./registro.css";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type Errors = {
   username: string;
@@ -101,7 +101,6 @@ export default function Registro() {
       );
 
       if (response.status === 200) {
-        console.log("Usuario registrado:", response.data);
         router.push("/login");
       } else {
         const errorData = response.data;
@@ -123,7 +122,7 @@ export default function Registro() {
   };
   return (
     <section className="bg-white">
-      <div className="lg:grid lg:grid-cols-12 contentRegistro">
+      <div className="lg:grid lg:grid-cols-12 min-h-[calc(100vh-180px)]">
         <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <Image
             alt="Imagen fondo"
@@ -204,6 +203,7 @@ export default function Registro() {
                       id="nombre"
                       className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                       placeholder=" "
+                      required
                       onChange={(e) => setNombre(e.target.value)}
                     />
                     <label
@@ -277,6 +277,7 @@ export default function Registro() {
                     id="telefono"
                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
+                    required
                     onChange={(event) => setTelefono(event.target.value)}
                   />
                   <label
@@ -327,9 +328,9 @@ export default function Registro() {
 
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   ¿Ya tienes una cuenta?
-                  <a href="#" className="text-gray-700 underline ml-1">
+                  <Link href="/login" className="text-gray-700 underline ml-1">
                     Identificarse
-                  </a>
+                  </Link>
                   .
                 </p>
               </div>

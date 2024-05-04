@@ -45,7 +45,7 @@ export function Header() {
       <div className="mx-auto max-w-screen-3xl px-4 sm:px-6 lg:px-8 pt-4">
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
-            <Link className="block text-teal-600" href="http://localhost:3000/">
+            <Link className="block text-teal-600" href="/">
               <span className="sr-only">Home</span>
               <Image
                 src="/logo.png"
