@@ -30,13 +30,13 @@ type AuthTokensInLocalStorage = {
 const AUTH_TOKENS_KEY = "NEXT_JS_AUTH";
 
 export const AuthContext = createContext({
-  login: (authTokens: AuthTokens) => {},
-  logout: () => {},
+  login: (authTokens: AuthTokens) => { },
+  logout: () => { },
   isLoggedIn: false,
   cambioToken: false,
   authTokens: null as AuthTokens | null,
   user: null as User | null,
-  setCambioToken: (value: boolean) => {},
+  setCambioToken: (value: boolean) => { },
 });
 
 export default function AuthContextProvider({
@@ -46,7 +46,7 @@ export default function AuthContextProvider({
 }) {
   const [isClient, setIsClient] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const [isLoggedIn, setLoggedIn] = useState<boolean>(true);
+  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
   const [cambioToken, setCambioToken] = useState<boolean>(false);
 
   useEffect(() => {
@@ -56,20 +56,21 @@ export default function AuthContextProvider({
         token: window.localStorage.getItem(AUTH_TOKENS_KEY) || "",
       };
       try {
-        const response = await axios.get(
-          "https://apiblog-01g5.onrender.com/api/auth/profile",
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${authTokensInLocalStorage.token}`,
-            },
-          }
-        );
+        const response = await axios.get("https://apiblog-01g5.onrender.com/api/auth/profile", {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${authTokensInLocalStorage.token}`,
+          },
+        });
         setUser(response.data.validToken);
         setLoggedIn(true);
-      } catch (error) {
-        console.error("Error al verificar el usuario", error);
-        setLoggedIn(false);
+      } catch (error: Error | any) {
+        if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
+          console.error("El token de autenticación es inválido o ha expirado", error);
+          setLoggedIn(false);
+        } else {
+          console.error("Error al verificar el usuario", error);
+        }
       }
     };
     verifyUser();
