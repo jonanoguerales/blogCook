@@ -55,6 +55,11 @@ export default function AuthContextProvider({
       const authTokensInLocalStorage: AuthTokensInLocalStorage = {
         token: window.localStorage.getItem(AUTH_TOKENS_KEY) || "",
       };
+      if (!authTokensInLocalStorage || !authTokensInLocalStorage.token) {
+        console.error("No hay token de autenticación en localStorage");
+        setLoggedIn(false);
+        return;
+      }
       try {
         const response = await axios.get("https://apiblog-01g5.onrender.com/api/auth/profile", {
           withCredentials: true,
