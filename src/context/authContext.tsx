@@ -46,7 +46,7 @@ export default function AuthContextProvider({
 }) {
   const [isClient, setIsClient] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const [isLoggedIn, setLoggedIn] = useState<boolean>(true);
+  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
   const [cambioToken, setCambioToken] = useState<boolean>(false);
 
   useEffect(() => {
@@ -55,6 +55,11 @@ export default function AuthContextProvider({
       const authTokensInLocalStorage: AuthTokensInLocalStorage = {
         token: window.localStorage.getItem(AUTH_TOKENS_KEY) || "",
       };
+      if (!authTokensInLocalStorage || !authTokensInLocalStorage.token) {
+        console.error("No hay token de autenticación en localStorage");
+        setLoggedIn(false);
+        return;
+      }
       try {
         const response = await axios.get(
           "https://apiblog-production-1e4c.up.railway.app/api/auth/profile",
@@ -67,9 +72,20 @@ export default function AuthContextProvider({
         );
         setUser(response.data.validToken);
         setLoggedIn(true);
-      } catch (error) {
-        console.error("Error al verificar el usuario", error);
-        setLoggedIn(false);
+      } catch (error: Error | any) {
+        if (
+          axios.isAxiosError(error) &&
+          error.response &&
+          error.response.status === 401
+        ) {
+          console.error(
+            "El token de autenticación es inválido o ha expirado",
+            error
+          );
+          setLoggedIn(false);
+        } else {
+          console.error("Error al verificar el usuario", error);
+        }
       }
     };
     verifyUser();
