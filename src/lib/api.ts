@@ -4,7 +4,9 @@ import { User } from "@/lib/interfaces";
 
 export async function getPosts() {
   try {
-    const res = await axios.get("https://apiblog-01g5.onrender.com/api/posts");
+    const res = await axios.get(
+      "https://apiblog-production-1e4c.up.railway.app/api/posts"
+    );
     if (res.status !== 200) {
       throw new Error(
         `Error al obtener los posts: ${res.status} ${res.statusText}`
@@ -27,7 +29,7 @@ export async function getPosts() {
 export async function getPostsCategorias(category: string) {
   try {
     const res = await axios.get(
-      `https://apiblog-01g5.onrender.com/api/posts/${category}`
+      `https://apiblog-production-1e4c.up.railway.app/api/posts/${category}`
     );
     if (res.status !== 200) {
       throw new Error(
@@ -51,7 +53,7 @@ export async function getPostsCategorias(category: string) {
 export async function getUser(id: string) {
   try {
     const res = await axios.get(
-      `https://apiblog-01g5.onrender.com/api/user/${id}`
+      `https://apiblog-production-1e4c.up.railway.app/api/user/${id}`
     );
     if (res.status !== 200) {
       throw new Error(
@@ -75,7 +77,7 @@ export async function getUser(id: string) {
 export async function getComentarios(id: string) {
   try {
     const res = await axios.get(
-      "https://apiblog-01g5.onrender.com/api/comments"
+      "https://apiblog-production-1e4c.up.railway.app/api/comments"
     );
     if (res.status !== 200) {
       throw new Error(

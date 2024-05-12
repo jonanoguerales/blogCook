@@ -14,7 +14,7 @@ export function SiderBar() {
     const fetchUsers = async () => {
       try {
         const res = await axios.get(
-          "https://apiblog-01g5.onrender.com/api/users"
+          "https://apiblog-production-1e4c.up.railway.app/api/users"
         );
         const data = res.data;
         const usersWithPosts = data.filter((user: User) => user.numPosts >= 0);

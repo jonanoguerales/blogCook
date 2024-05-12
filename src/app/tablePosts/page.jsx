@@ -52,7 +52,7 @@ function TablePosts() {
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await axios.get(
-        "https://apiblog-01g5.onrender.com/api/posts"
+        "https://apiblog-production-1e4c.up.railway.app/api/posts"
       );
       setPosts(res.data);
     };
@@ -75,7 +75,7 @@ function TablePosts() {
       setPosts(dataNueva);
 
       await axios.put(
-        `https://apiblog-01g5.onrender.com/api/post/${postSeleccionado._id}`,
+        `https://apiblog-production-1e4c.up.railway.app/api/post/${postSeleccionado._id}`,
         {
           username: postSeleccionado.username,
           title: postSeleccionado.title,
@@ -92,7 +92,7 @@ function TablePosts() {
     try {
       setPosts(posts.filter((post) => post._id !== postSeleccionado._id));
       await axios.delete(
-        `https://apiblog-01g5.onrender.com/api/post/${postSeleccionado._id}`
+        `https://apiblog-production-1e4c.up.railway.app/api/post/${postSeleccionado._id}`
       );
       setModalEliminar(false);
       setCambio(!cambio);

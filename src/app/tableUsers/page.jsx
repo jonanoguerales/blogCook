@@ -53,7 +53,7 @@ function TableUsers() {
   useEffect(() => {
     const fetchUsers = async () => {
       const res = await axios.get(
-        "https://apiblog-01g5.onrender.com/api/users"
+        "https://apiblog-production-1e4c.up.railway.app/api/users"
       );
       const data = res.data;
 
@@ -68,7 +68,7 @@ function TableUsers() {
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `https://apiblog-01g5.onrender.com/api/user/${userSeleccionado._id}`
+        `https://apiblog-production-1e4c.up.railway.app/api/user/${userSeleccionado._id}`
       );
       // Borrar el token del local storage
       window.localStorage.removeItem(AUTH_TOKENS_KEY);
@@ -96,7 +96,7 @@ function TableUsers() {
       setUsers(dataNueva);
 
       await axios.put(
-        `https://apiblog-01g5.onrender.com/api/users/${userSeleccionado._id}`,
+        `https://apiblog-production-1e4c.up.railway.app/api/users/${userSeleccionado._id}`,
         {
           username: userSeleccionado.username,
           nombre: userSeleccionado.nombre,

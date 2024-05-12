@@ -48,7 +48,7 @@ const Settings = () => {
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `https://apiblog-01g5.onrender.com/api/user/${user?.id}`
+        `https://apiblog-production-1e4c.up.railway.app/api/user/${user?.id}`
       );
       // Borrar el token del local storage
       window.localStorage.removeItem(AUTH_TOKENS_KEY);
@@ -87,7 +87,7 @@ const Settings = () => {
     }
     try {
       const response = await axios.put(
-        `https://apiblog-01g5.onrender.com/api/user/${user?.id}`,
+        `https://apiblog-production-1e4c.up.railway.app/api/user/${user?.id}`,
         updatedUser
       );
       window.localStorage.setItem(

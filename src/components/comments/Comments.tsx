@@ -21,7 +21,7 @@ const Comments = ({ post }: { post: Post }) => {
     };
     try {
       await axios.post(
-        "https://apiblog-01g5.onrender.com/api/comments",
+        "https://apiblog-production-1e4c.up.railway.app/api/comments",
         newComment
       );
       setClick(!click);

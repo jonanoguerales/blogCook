@@ -13,7 +13,7 @@ import { ImagePlacehoderSkeleton } from "@/components/skeletons/SkeletonImg";
 const getCategoryColors = async () => {
   try {
     const response = await axios.get(
-      "https://apiblog-01g5.onrender.com/api/categories"
+      "https://apiblog-production-1e4c.up.railway.app/api/categories"
     );
     const categoryColors = response.data.reduce(
       (
@@ -105,7 +105,7 @@ export default function Redactar() {
 
     try {
       const res = await axios.post(
-        "https://apiblog-01g5.onrender.com/api/post",
+        "https://apiblog-production-1e4c.up.railway.app/api/post",
         newPost
       );
       router.replace(`/posts/${res.data._id}`);

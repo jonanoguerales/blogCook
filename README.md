@@ -14,7 +14,7 @@ pnpm dev
 bun dev
 ```
 
-Open [https://apiblog-01g5.onrender.com](https://apiblog-01g5.onrender.com) with your browser to see the result.
+Open [https://apiblog-production-1e4c.up.railway.app](https://apiblog-production-1e4c.up.railway.app) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

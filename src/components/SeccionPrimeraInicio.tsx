@@ -52,7 +52,7 @@ export function SeccionPrimeraInicio() {
   useEffect(() => {
     const fetchPost = async () => {
       const res = await axios.get(
-        "https://apiblog-01g5.onrender.com/api/posts"
+        "https://apiblog-production-1e4c.up.railway.app/api/posts"
       );
       setPosts(res.data);
     };

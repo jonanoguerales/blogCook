@@ -6,7 +6,7 @@ export async function UpdateUser(
   type: "post" | "comment" | "like"
 ) {
   const res = await axios.get(
-    `https://apiblog-01g5.onrender.com/api/user/${props.id}`
+    `https://apiblog-production-1e4c.up.railway.app/api/user/${props.id}`
   );
   const data = await res.data;
   const users = data;
@@ -37,7 +37,7 @@ export async function UpdateUser(
       throw new Error("Invalid type");
   }
   await axios.put(
-    `https://apiblog-01g5.onrender.com/api/user/${props.id}`,
+    `https://apiblog-production-1e4c.up.railway.app/api/user/${props.id}`,
     updateUser
   );
 }

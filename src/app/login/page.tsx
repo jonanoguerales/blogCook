@@ -27,7 +27,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://apiblog-01g5.onrender.com/api/auth/login",
+        "https://apiblog-production-1e4c.up.railway.app/api/auth/login",
         {
           username,
           password,

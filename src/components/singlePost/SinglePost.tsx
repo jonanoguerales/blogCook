@@ -26,7 +26,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
       if (typeof id === "string") {
         try {
           const res = await axios.get(
-            `https://apiblog-01g5.onrender.com/api/post/${id}`
+            `https://apiblog-production-1e4c.up.railway.app/api/post/${id}`
           );
           setPost(res.data);
           setTitle(res.data.title);
@@ -73,7 +73,7 @@ const SinglePost: React.FC<SinglePostProps> = ({ id }) => {
 
     try {
       await axios.put(
-        `https://apiblog-01g5.onrender.com/api/posts/${id}`,
+        `https://apiblog-production-1e4c.up.railway.app/api/posts/${id}`,
         updatePost
       );
       setUpdateMode(false);
