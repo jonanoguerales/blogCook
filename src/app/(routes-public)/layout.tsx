@@ -1,9 +1,12 @@
+"use client";
+
 import { ReactNode } from "react";
 import { Header } from "@/components/Header";
 import Footer from "@/components/footer/Footer";
 import ScrollTop from "@/components/botonScroll/ScrollBoton";
 
-function LayoutCategorias({ children }: { children: ReactNode }) {
+function LayoutRoutesPublic({ children }: { children: ReactNode }) {
+
   return (
     <>
       <Header />
@@ -14,4 +17,4 @@ function LayoutCategorias({ children }: { children: ReactNode }) {
   );
 }
 
-export default LayoutCategorias;
+export default LayoutRoutesPublic;

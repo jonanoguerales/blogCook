@@ -4,7 +4,6 @@ import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
 import "./post.css";
-import { useRouter } from "next/navigation";
 import { Post, SinglePostProps } from "@/lib/interfaces";
 import { useAuth } from "@/context/authContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

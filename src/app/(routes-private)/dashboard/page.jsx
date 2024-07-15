@@ -13,7 +13,7 @@ import {
   chartLineConfig,
   chartPieConfig,
   chartBarConfig,
-} from "../../lib/datacharts";
+} from "@/lib/datacharts";
 
 const Dashboard = () => {
   return (

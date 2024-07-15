@@ -4,10 +4,10 @@ import { redirect } from "next/navigation";
 import { useAuth } from "@/context/authContext";
 import { ReactNode } from "react";
 import { Header } from "@/components/Header";
-import ScrollTop from "@/components/botonScroll/ScrollBoton";
 import Footer from "@/components/footer/Footer";
+import ScrollTop from "@/components/botonScroll/ScrollBoton";
 
-function LayoutRedactar({ children }: { children: ReactNode }) {
+function LayoutRoutesPrivate({ children }: { children: ReactNode }) {
   const { isLoggedIn } = useAuth();
 
   if (isLoggedIn === false) {
@@ -24,4 +24,4 @@ function LayoutRedactar({ children }: { children: ReactNode }) {
   );
 }
 
-export default LayoutRedactar;
+export default LayoutRoutesPrivate;
