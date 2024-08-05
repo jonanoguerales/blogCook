@@ -2,7 +2,7 @@
 import Link from "next/link";
 import "./login.css";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
@@ -11,16 +11,28 @@ import { useAuth } from "@/context/authContext";
 export default function Login() {
   const [success, setSuccess] = useState<boolean>(false);
   const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const username = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
   const { login } = useAuth();
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+    if (
+      username.current &&
+      username.current !== null &&
+      username.current !== undefined
+    ) {
+      username.current.value = e.target.value;
+    }
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+    if (
+      password.current &&
+      password.current !== null &&
+      password.current !== undefined
+    ) {
+      password.current.value = e.target.value;
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -29,8 +41,8 @@ export default function Login() {
       const response = await axios.post(
         "https://apiblog-production-1e4c.up.railway.app/api/auth/login",
         {
-          username,
-          password,
+          username: username.current?.value,
+          password: password.current?.value,
         }
       );
       if (response) {
@@ -46,17 +58,20 @@ export default function Login() {
       setSuccess(true);
     }
   };
+
   return (
     <div className="login">
       <h1>Inicio de Sesión</h1>
       <div className="loginForm">
         <form onSubmit={handleSubmit}>
           <input
+            ref={username}
             type="text"
             placeholder="Nombre de usuario"
             onChange={handleUsernameChange}
           />
           <input
+            ref={password}
             type="password"
             placeholder="Contraseña"
             onChange={handlePasswordChange}

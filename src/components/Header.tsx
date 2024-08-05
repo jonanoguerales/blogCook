@@ -49,6 +49,7 @@ export function Header() {
               <span className="sr-only">Home</span>
               <Image
                 src="/logo.png"
+                priority
                 alt="imagen logo pagina"
                 width={1920}
                 height={1080}

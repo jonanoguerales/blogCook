@@ -1,7 +1,10 @@
 "use client";
 import { FormEvent, useRef } from "react";
-import "./contacto.css";
 import emailjs from "@emailjs/browser";
+import classes from "./contacto.module.css";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faInstagram, faPinterest, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const Page: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -30,47 +33,55 @@ const Page: React.FC = () => {
     }
   };
   return (
-    <div className="contact">
-      <h1 className="contactTitle">Contacta con nosotros</h1>
-      <div className="formData">
-        <div className="formContainer">
-          <form className="contactForm" ref={form} onSubmit={sendEmail}>
-            <label className="contactLabel">Nombre completo</label>
-            <input type="text" className="contactInput" name="user_name" />
-            <label className="contactLabel">E-mail</label>
-            <input type="email" className="contactInput" name="user_email" />
-            <label className="contactLabel">Mensaje</label>
+    <div className={classes.contact}>
+      <h1 className={classes.contactTitle}>Contacta con nosotros</h1>
+      <div className={classes.formData}>
+        <div className={classes.formContainer}>
+          <form className={classes.contactForm} ref={form} onSubmit={sendEmail}>
+            <label className={classes.contactLabel}>Nombre completo</label>
+            <input type="text" className={classes.contactInput} name="user_name" />
+            <label className={classes.contactLabel}>E-mail</label>
+            <input type="email" className={classes.contactInput} name="user_email" />
+            <label className={classes.contactLabel}>Mensaje</label>
             <textarea
               name="user_message"
-              className="contactInput"
+              className={classes.contactInput}
               cols={30}
               rows={3}
             />
-            <button type="submit" className="contactBtn">
+            <button type="submit" className={classes.contactBtn}>
               Enviar
             </button>
           </form>
         </div>
-        <div className="contactUs">
-          <div className="contactTop">
+        <div className={classes.contactUs}>
+          <div className={classes.contactTop}>
             <h3>Contacto</h3>
-            <span className="contactMail">blogreactmongo@gmail.com</span>
+            <span className={classes.contactMail}>blogreactmongo@gmail.com</span>
             <h3>Dirección</h3>
-            <span className="contactMail">C/ Imaginaria, N/32 </span>
+            <span className={classes.contactMail}>C/ Imaginaria, N/32 </span>
           </div>
-          <div className="contactBottom">
-            <a href="www.facebook.com" target="_blank">
-              <i className="topIcon fab fa-facebook-square" />
-            </a>
-            <a href="www.instagram.com" target="_blank">
-              <i className="topIcon fab fa-instagram-square" />
-            </a>
-            <a href="www.pinterest.com" target="_blank">
-              <i className="topIcon fab fa-pinterest-square" />
-            </a>
-            <a href="www.twitter.com" target="_blank">
-              <i className="topIcon fab fa-twitter-square" />
-            </a>
+          <div className={classes.contactBottom}>
+            <Link
+              href="https://es-es.facebook.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FontAwesomeIcon icon={faFacebook} className="size-6  hover:text-[#1DA1F2]" />
+            </Link>
+            <Link
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FontAwesomeIcon icon={faInstagram} className="size-6  hover:text-[#1DA1F2]" />
+            </Link>
+            <Link href="https://www.pinterest.es/" target="_blank" rel="noreferrer">
+              <FontAwesomeIcon icon={faPinterest} className="size-6  hover:text-[#1DA1F2]" />
+            </Link>
+            <Link href="https://twitter.com/" target="_blank" rel="noreferrer">
+              <FontAwesomeIcon icon={faXTwitter} className="size-6 hover:text-[#1DA1F2]" />
+            </Link>
           </div>
         </div>
       </div>

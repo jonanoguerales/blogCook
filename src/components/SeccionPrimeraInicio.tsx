@@ -75,6 +75,7 @@ export function SeccionPrimeraInicio() {
                     <Image
                       alt="Imagen de la receta"
                       src={item.photo}
+                      priority
                       className="absolute inset-0 h-full w-full object-fill lg:rounded-lg rounded-t-lg shadow-xl"
                       width={1920}
                       height={1080}

@@ -17,6 +17,7 @@
   color: #1f1e3d;
   text-align: center;
   line-height: 100px;
+  padding-bottom: 10px;
 }
 
 .formData {
@@ -52,12 +53,11 @@
 .contactUs {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  height: 280px;
+  gap: 1rem;
 }
 
-h3 {
+.contactTop h3 {
   padding: 5px 10px;
   font-family: "Inter", sans-serif;
   font-style: normal;
@@ -73,11 +73,8 @@ span.contactMail {
 }
 
 .contactBottom {
-  padding-bottom: 30px;
-}
-
-.contactBottom a i {
-  font-size: 38px;
+  display: flex;
+  gap: 1rem;
 }
 
 .contactBtn {
@@ -136,7 +133,7 @@ span.contactMail {
     justify-content: space-evenly;
     margin-bottom: 100px;
   }
-  h3 {
+  .contactTop h3 {
     padding-top: 20px;
   }
 }
